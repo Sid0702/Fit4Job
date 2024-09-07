@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<h2 class="job-heading">Explore Job By Categories</h2>
+
+<div class="job">
+    <div class="icon-box">
+        <img src="{% static 'images/finance.png' %}" alt="Accounting Icon">
+        <h3>Finance</h3>
+        <p>100 open positions</p>
+    </div>
+
+    <div class="icon-box">
+        <img src="{% static 'images/education.png' %}" alt="Education Icon">
+        <h3>Education</h3>
+        <p>100 open positions</p>
+    </div>
+
+    <div class="icon-box">
+        <img src="{% static 'images/programmer.png' %}" alt="Programmer Icon">
+        <h3>Programmer</h3>
+        <p>100 open positions</p>
+    </div>
+
+    <div class="icon-box">
+        <img src="{% static 'images/consultancy.png' %}" alt="Consultancy Icon">
+        <h3>Consultancy</h3>
+        <p>100 open positions</p>
+    </div>
+
+    <div class="icon-box">
+        <img src="{% static 'images/production.png' %}" alt="Production Icon">
+        <h3>Production</h3>
+        <p>100 open positions</p>
+    </div>
+
+    <div class="icon-box">
+        <img src="{% static 'images/design.png' %}" alt="UX/UI Icon">
+        <h3>UX/UI</h3>
+        <p>100 open positions</p>
+    </div>
+
+    <!-- Repeat the structure above for Production, Education and Consultancy with their respective icons -->
+
+</div>
+{% endblock content %}

@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div id="login-page">
+<div class="container right-panel-active">
+    <div class="panel-active">
+      <div class="signup-form overlay-panel">
+        <form action="#" class="form" id="form1">
+          <h2 class="form__title">Sign Up</h2>
+          <input type="text" placeholder="User" class="input-field" />
+          <input type="email" placeholder="Email" class="input-field" />
+          <input  type="password" placeholder="Password" class="input-field" />
+          <button class="btn" class="sign-up">Sign Up</button>                
+        </form> 
+      </div>
+ 
+      <div class="signin-form overlay-panel">
+        <form action="#" class="form" id="form2">
+          <h2 class="form__title">Sign In</h2>
+          <input type="email" placeholder="Email" class="input-field" />
+          <input type="password" placeholder="Password" class="input-field" />
+          <a href="#" class="link">Forgot your password?</a>
+          <button class="btn" class="sign-in">Sign In</button>
+        </form> 
+      </div>
+    </div>
+ 
+    <div class="overlay-btns">
+      <div class="panel-btns">
+        <div class="panel-left-btn submit-btns">
+          <button class="btn" id="signIn">Sign In</button>
+        </div>
+        <div class="panel-right-btn submit-btns">
+          <button class="btn" id="signUp">Sign Up</button>
+        </div>
+      </div>
+    </div>
+ 
+ </div>
+</div>
+{% endblock content %}

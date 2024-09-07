@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<section class="about-us section">
+    <div class="contain">
+        <div class="row">
+            <!-- Left content -->
+            <div class="col-lg-6 align-self-center">
+                <div class="section-heading">
+                    <h4>About <em>What We Do</em> & Who We Are</h4>
+                    <img src="{% static 'images/heading-line-dec.png' %}" alt="">
+                    <p>At Fit4Job, we’re on a mission to make your resume shine and get you noticed.</p>
+                </div>
+                <div class="box-item">
+                    <h4>Our Mission</h4>
+                    <p>Our mission is to make sure your resume gets noticed. We provide the tools and insights needed to optimize
+                       your resume for Applicant Tracking Systems (ATS) so it stands out to recruiters. Whether you’re just starting out 
+                       or looking to advance your career, we’re here to help you connect with the opportunities you deserve.
+                    </p>
+                </div>
+                <div class="gradient-button">
+                    <a href="{% url 'contact' %}">Get in Touch</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
