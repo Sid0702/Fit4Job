@@ -25,4 +25,11 @@ urlpatterns = [
     path('job/', job_view, name='job'),
     path('signin/', signin_view, name='signin'),
     path('contact/', contact_view, name='contact'),
+    path('programmer/', programmer_view, name='programmer'),
+    path('education/', education_view, name='education'),
+    path('design/', design_view, name='design'),
+    path('finance/', finance_view, name='finance'),
+    path('production/', production_view, name='production'),
+    path('consult/', consult_view, name='consult'),
+    path('register/', register_view, name='register'),
 ]

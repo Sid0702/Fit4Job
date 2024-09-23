@@ -2,32 +2,139 @@
 {% load static %}
 
 {% block content %}
-<div class="cont">
-	<div id="wrapper">
-	<div class="contact-us">
-		<h2>Contact Us</h2>
-		<ul>
-			<li><i class="las la-map-marker"></i>32 Avenue Park, New York, 321897, NY</li>
-			<li><i class="las la-envelope-open"></i> info@loremipsum.com</li>
-			<li><i class="las la-phone"></i> +217 8969 5354</li>
-			<li><i class="las la-globe-americas"></i> +217 789 456</li>
-		</ul>
-	</div>
-	<div class="get-in-touch">
-				<h2>Get in Touch</h2>
-		<p>Feel free to contact us</p>
-		<form action="#">
-			<input type="text" placeholder="Your Name">
-			<input type="email" placeholder="Your Email">
-			<textarea name="" id="" placeholder="Type your message here" value="Type your message here"></textarea>
-					<input type="submit" value="send" name="">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us</title>
+    <style>
+        .cont {
+            width: 600px;
+            margin: 0 auto;
+            background: #fff;
+            margin-top: 7rem;
+            margin-bottom: 3rem;
+        }
 
-		</form>
+        #wrapper {
+            padding: 2rem 3rem;
+            display: flex;
+        }
 
-	</div>
-</div>
-</div>
+        .contact-us {
+            background: #063564;
+            color: #ffffff;
+            padding: 2.5rem 3rem 2rem;
+            margin-left: -8rem;
+            width: 40%;
+        }
 
+        .contact-us h2 {
+            letter-spacing: 1px;
+            font-weight: 600;
+            margin-bottom: 3rem;
+            font-size: 1.5rem;
+        }
 
+        .contact-us ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .contact-us ul li {
+            font-size: 0.9rem;
+            margin-bottom: 2rem;
+            position: relative;
+            margin-left: 2.5rem;
+        }
+
+        .contact-us ul li i {
+            font-size: 1.3rem;
+            position: absolute;
+            left: -2.5rem;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .get-in-touch {
+            padding: .2rem 1rem 1rem 3rem;
+            width: 65%;
+        }
+
+        .get-in-touch h2 {
+            letter-spacing: 1px;
+            font-weight: 600;
+            margin-bottom: -16px;
+            font-size: 1.8rem;
+            color: #043260;
+        }
+
+        .get-in-touch p {
+            color: #071d67;
+            font-size: 0.9rem;
+            margin-bottom: 2rem;
+        }
+
+        .get-in-touch form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .get-in-touch input,
+        .get-in-touch textarea {
+            background: #b2cef9;
+            border: none;
+            padding: 15px;
+            margin-bottom: 1rem;
+            border-radius: 10px;
+        }
+
+        .get-in-touch textarea {
+            height: 4rem;
+        }
+
+        .get-in-touch input[type=submit] {
+            background: #042648;
+            color: #fff;
+            font-size: .9rem;
+            text-transform: uppercase;
+            font-weight: 600;
+            letter-spacing: 2px;
+            width: 48%;
+            padding: 15px 25px;
+            border-radius: 29px;
+        }
+
+        ::placeholder {
+            color: #042648;
+        }
+    </style>
+</head>
+<body>
+    <div class="cont">
+        <div id="wrapper">
+            <div class="contact-us">
+                <h2>Contact Us</h2>
+                <ul>
+                    <li><i class="las la-map-marker"></i>32 Avenue Park, New York, 321897, NY</li>
+                    <li><i class="las la-envelope-open"></i> info@loremipsum.com</li>
+                    <li><i class="las la-phone"></i> +217 8969 5354</li>
+                    <li><i class="las la-globe-americas"></i> +217 789 456</li>
+                </ul>
+            </div>
+            <div class="get-in-touch">
+                <h2>Get in Touch</h2>
+                <p>Feel free to contact us</p>
+                <form action="#">
+                    <input type="text" placeholder="Your Name">
+                    <input type="email" placeholder="Your Email">
+                    <textarea placeholder="Type your message here"></textarea>
+                    <input type="submit" value="send">
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
 {% endblock content %}
-

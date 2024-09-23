@@ -7,6 +7,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Fit4Job{% endblock %}</title>
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <!-- <link rel="stylesheet" href="{% static 'css/contact.css' %}"> -->
+    <link rel="stylesheet" href="{% static 'css/job_category.css' %}">
+    <link rel="stylesheet" href="{% static 'css/about.css' %}">
+   
+
     <script src="{% static 'js/script.js' %}" defer></script>
 
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
@@ -21,13 +26,15 @@
             <nav>
                 <ul>
                     <li><a href="{% url 'index' %}">Home</a></li>
-                    <li><a href="#Services">Services</a></li>
                     <li><a href="{% url 'about' %}">About</a></li>
                     <li><a href="{% url 'job' %}">Job</a></li>
                     <li><a href="{% url 'contact' %}">Contact</a></li>
                 </ul>
             </nav>
+            <ul>
             <a href="{% url 'signin' %}" class="sign-in-btn">Sign In Now</a>
+            <a href="{% url 'register' %}" class="sign-in-btn" >Register Now</a>
+            </ul>
         </div>
     </header>
 
@@ -37,15 +44,7 @@
         {% endblock %}
     </main>
 
-    <!-- Footer -->
-    <div class="footer">
-        <p>Company</p>
-        <ul class="footer_Links">
-            <li>contact</li>
-            <li>Price Guide</li>
-            <li>Portfolio</li>
-            <ul>
-    </div>
+    
 </body>
 
 </html>

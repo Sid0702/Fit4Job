@@ -1,0 +1,105 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<head>
+  <title>Register Now</title>
+  <style>
+    body {
+      background-color: #f0f4f8; /* Light blue-grey for a soft backdrop */
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      padding-top: 20px;
+    }
+
+    .register-box {
+      background-color: #ffffff; /* White for contrast */
+      padding: 40px;
+      border-radius: 15px;
+      text-align: center;
+      width: 320px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      transition: transform 0.3s ease-in-out, background-color 0.3s ease-in-out;
+      background: linear-gradient(145deg, #9bc0e2, #3687e5); /* Light blue gradient for subtle depth */
+    }
+
+    
+
+    .register-box h2 {
+      color: #042648; /* Deep blue for the header */
+      margin-bottom: 20px;
+      font-size: 26px;
+      letter-spacing: 1px;
+    }
+
+    .register-box input,
+    .register-box select {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      border-radius: 5px;
+      border: 1px solid #e8eef4;
+      box-sizing: border-box;
+      font-size: 14px;
+      background-color: #f0f6ff; /* Very light blue */
+      transition: background-color 0.3s ease;
+    }
+
+    .register-box input:focus,
+    .register-box select:focus {
+      background-color: #e0eaff; /* Slightly darker blue on focus */
+      border-color: #004c8c;
+    }
+
+    .register-box button {
+      width: 100%;
+      padding: 12px;
+      background-color: #02243f;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+      cursor: pointer;
+      margin-top: 15px;
+      transition: background-color 0.3s ease, transform 0.3s ease;
+    }
+
+    .register-box button:hover {
+      background-color: #022447;
+      transform: translateY(-3px);
+    }
+
+    .register-box button:active {
+      transform: translateY(1px);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="register-box">
+      <h2>Register Now</h2>
+      <form action="/register" method="POST">
+          <input type="text" placeholder="Username" required>
+          <input type="email" placeholder="Email" required>
+          <input type="password" placeholder="Password" required>
+          <input type="password" placeholder="Confirm Password" required>
+          <select required>
+              <option value="" disabled selected>Select Role</option>
+              <option value="job_seeker">Job Seeker</option>
+              <option value="recruiter">Recruiter</option>
+          </select>
+          <button type="submit">Register</button>
+      </form>
+  </div>
+
+</body>
+
+{% endblock content %}

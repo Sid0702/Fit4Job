@@ -2,41 +2,97 @@
 {% load static %}
 
 {% block content %}
-<div id="login-page">
-<div class="container right-panel-active">
-    <div class="panel-active">
-      <div class="signup-form overlay-panel">
-        <form action="#" class="form" id="form1">
-          <h2 class="form__title">Sign Up</h2>
-          <input type="text" placeholder="User" class="input-field" />
-          <input type="email" placeholder="Email" class="input-field" />
-          <input  type="password" placeholder="Password" class="input-field" />
-          <button class="btn" class="sign-up">Sign Up</button>                
-        </form> 
-      </div>
- 
-      <div class="signin-form overlay-panel">
-        <form action="#" class="form" id="form2">
-          <h2 class="form__title">Sign In</h2>
-          <input type="email" placeholder="Email" class="input-field" />
-          <input type="password" placeholder="Password" class="input-field" />
-          <a href="#" class="link">Forgot your password?</a>
-          <button class="btn" class="sign-in">Sign In</button>
-        </form> 
-      </div>
-    </div>
- 
-    <div class="overlay-btns">
-      <div class="panel-btns">
-        <div class="panel-left-btn submit-btns">
-          <button class="btn" id="signIn">Sign In</button>
-        </div>
-        <div class="panel-right-btn submit-btns">
-          <button class="btn" id="signUp">Sign Up</button>
-        </div>
-      </div>
-    </div>
- 
- </div>
-</div>
+
+<head>
+
+  <title>Sign In</title>
+  <style>
+    body {
+    background-color: #f0f4f8; /* Light blue-grey for a soft backdrop */
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.signin-box {
+    background-color: #ffffff; /* White for contrast */
+    padding: 40px;
+    border-radius: 15px;
+    text-align: center;
+    width: 320px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: transform 0.3s ease-in-out, background-color 0.3s ease-in-out;
+    background: linear-gradient(145deg, #9bc0e2, #3687e5); /* Light blue gradient for subtle depth */
+}
+
+
+
+.signin-box h2 {
+    color: #042648; /* Deep blue for the header */
+    margin-bottom: 20px;
+    font-size: 26px;
+    letter-spacing: 1px;
+}
+
+.signin-box input {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    border-radius: 5px;
+    border: 1px solid #e8eef4;
+    box-sizing: border-box;
+    font-size: 14px;
+    background-color: #f0f6ff; /* Very light blue */
+    transition: background-color 0.3s ease;
+}
+
+.signin-box input:focus {
+    background-color: #e0eaff; /* Slightly darker blue on focus */
+    border-color: #004c8c;
+}
+
+.signin-box button {
+    width: 100%;
+    padding: 12px;
+    background-color: #042648;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 15px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.signin-box button:hover {
+    background-color: #042648;
+    transform: translateY(-3px);
+}
+
+.signin-box button:active {
+    transform: translateY(1px);
+}
+  </style>
+</head>
+<body>
+
+  <div class="signin-box">
+      <h2>Sign In</h2>
+      <form action="/login" method="POST">
+          <input type="text" placeholder="Username" required>
+          <input type="password" placeholder="Password" required>
+          <button type="submit">Sign In</button>
+      </form>
+  </div>
+
+</body>
+
+
+
 {% endblock content %}

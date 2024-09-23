@@ -1,0 +1,43 @@
+
+html, body {
+    overflow-x: hidden; /* Prevent horizontal scroll on the entire page */
+  }
+
+.body-wrapper {
+    width: 100%;
+    background: linear-gradient(rgb(98, 117, 237), rgb(168, 170, 177));
+    padding: 20px;
+    min-height: 100vh;
+    margin-top: 5rem;
+  }
+  
+  .job-list {
+    padding: 0;
+    margin: 0;
+  }
+  
+  .job-item {
+    color: black;
+    background-color: rgba(255, 255, 255, 0.736);
+    list-style-type: none;
+    padding: 35px 50px;
+    margin: 20px auto;
+    transition: all 0.5s; /* Adjusted for smoother transitions */
+    width: 50%;
+    opacity: 1; /* Set opacity to 1 to ensure visibility */
+    display: block; /* Ensure items are displayed */
+  }
+  
+  .job-item:hover {
+    background-color: white;
+    padding: 50px 70px;
+  }
+  
+  .job-link {
+    text-decoration: none;
+    color: black;
+  }
+  
+  .job-title, .job-location, .job-description {
+    margin: 0;
+  }

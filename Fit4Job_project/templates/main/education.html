@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="body-wrapper">
+    <div class="list-wrapper">
+      <ul class="job-list">
+        <li class="job-item">
+          <a href="https://www.google.com" class="job-link">
+            <div>
+              <h3 class="job-title">Job Title</h3>
+              <h4 class="job-location">Location</h4>
+              <p class="job-description">This is the description of the job</p>
+            </div>
+          </a>
+        </li>
+        <li class="job-item">
+          <div>
+            <h3 class="job-title">Job Title</h3>
+            <h4 class="job-location">Location</h4>
+            <p class="job-description">This is the description of the job</p>
+          </div>
+        </li>
+        <!-- Repeat for other job items -->
+      </ul>
+    </div>
+</div>
+
+{% endblock content %}

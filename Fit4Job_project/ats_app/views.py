@@ -15,4 +15,23 @@ def signin_view(request):
 def contact_view(request):
     return render(request, 'main/contact.html')
 
+def programmer_view(request):
+    return render(request, 'main/programmer.html')
 
+def education_view(request):
+    return render(request, 'main/education.html')
+
+def design_view(request):
+    return render(request, 'main/design.html')
+
+def finance_view(request):
+    return render(request, 'main/finance.html')
+
+def production_view(request):
+    return render(request, 'main/production.html')
+
+def consult_view(request):
+    return render(request, 'main/consult.html')
+
+def register_view(request):
+    return render(request, 'main/register.html')
