@@ -50,6 +50,12 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+# Session settings (default behavior)
+SESSION_ENGINE = 'django.contrib.sessions.backends.db'
+
+# Configure message storage (optional, default is used if omitted)
+MESSAGE_STORAGE = 'django.contrib.messages.storage.session.SessionStorage'
+
 ROOT_URLCONF = 'Fit4Job_project.urls'
 
 TEMPLATES = [

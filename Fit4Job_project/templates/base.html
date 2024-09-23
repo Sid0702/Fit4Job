@@ -32,12 +32,15 @@
                 </ul>
             </nav>
             <ul>
-            <a href="{% url 'signin' %}" class="sign-in-btn">Sign In Now</a>
-            <a href="{% url 'register' %}" class="sign-in-btn" >Register Now</a>
+                {% if request.session.username %}
+                    <a href="{% url 'logout' %}" class="sign-in-btn">Logout</a>
+                {% else %}
+                    <a href="{% url 'signin' %}" class="sign-in-btn">Sign In Now</a>
+                    <a href="{% url 'register' %}" class="sign-in-btn">Register Now</a>
+                {% endif %}
             </ul>
         </div>
     </header>
-
     <!-- Content Block -->
     <main>
         {% block content %}

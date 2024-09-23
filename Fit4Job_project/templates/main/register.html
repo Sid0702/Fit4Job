@@ -31,8 +31,6 @@
       background: linear-gradient(145deg, #9bc0e2, #3687e5); /* Light blue gradient for subtle depth */
     }
 
-    
-
     .register-box h2 {
       color: #042648; /* Deep blue for the header */
       margin-bottom: 20px;
@@ -80,26 +78,57 @@
     .register-box button:active {
       transform: translateY(1px);
     }
+
+    .messages {
+      width: 100%;
+      margin-bottom: 15px;
+      list-style: none;
+      padding: 0;
+    }
+
+    .messages li {
+      padding: 10px;
+      border-radius: 5px;
+      margin-bottom: 10px;
+      color: #fff;
+    }
+
+    .messages .error {
+      background-color: #ff4d4d; /* Red for errors */
+    }
+
+    .messages .success {
+      background-color: #4caf50; /* Green for success */
+    }
   </style>
 </head>
-<body>
 
+<body>
   <div class="register-box">
       <h2>Register Now</h2>
-      <form action="/register" method="POST">
-          <input type="text" placeholder="Username" required>
-          <input type="email" placeholder="Email" required>
-          <input type="password" placeholder="Password" required>
-          <input type="password" placeholder="Confirm Password" required>
-          <select required>
-              <option value="" disabled selected>Select Role</option>
-              <option value="job_seeker">Job Seeker</option>
-              <option value="recruiter">Recruiter</option>
-          </select>
-          <button type="submit">Register</button>
+      
+      {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+                <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+            {% endfor %}
+        </ul>
+      {% endif %}
+      
+      <form method="POST">
+        {% csrf_token %}
+        <input type="text" name="username" placeholder="Username" required>
+        <input type="email" name="email" placeholder="Email" required>
+        <input type="password" name="password" placeholder="Password" required>
+        <input type="password" name="confirm_password" placeholder="Confirm Password" required>
+        <select name="role" required>
+            <option value="" disabled selected>Select Role</option>
+            <option value="job_seeker">Job Seeker</option>
+            <option value="recruiter">Recruiter</option>
+        </select>
+        <button type="submit">Register</button>
       </form>
   </div>
-
 </body>
 
 {% endblock content %}
