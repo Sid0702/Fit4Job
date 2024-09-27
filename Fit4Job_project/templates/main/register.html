@@ -115,7 +115,7 @@
         </ul>
       {% endif %}
       
-      <form method="POST">
+      <form method="POST" action="{% url 'register' %}">
         {% csrf_token %}
         <input type="text" name="username" placeholder="Username" required>
         <input type="email" name="email" placeholder="Email" required>
@@ -130,5 +130,6 @@
       </form>
   </div>
 </body>
+
 
 {% endblock content %}
