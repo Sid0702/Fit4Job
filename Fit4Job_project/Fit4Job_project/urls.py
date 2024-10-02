@@ -33,4 +33,5 @@ urlpatterns = [
     path('consult/', consult_view, name='consult'),
     path('register/', register_view, name='register'),
     path('logout/', logout_view, name='logout'),
+    path('HR/', HR_view, name='HR'),
 ]

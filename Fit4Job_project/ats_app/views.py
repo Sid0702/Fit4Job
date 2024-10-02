@@ -19,6 +19,13 @@ def job_view(request):
 def contact_view(request):
     return render(request, 'main/contact.html')
 
+
+def HR_view(request):
+    return render(request, 'main/HR.html')
+
+def post_view(request):
+    return render(request, 'main/post.html')
+
 @login_required(login_url='signin')  # Protect individual job category pages
 def programmer_view(request):
     return render(request, 'main/programmer.html')
