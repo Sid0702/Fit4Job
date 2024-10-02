@@ -20,8 +20,8 @@ def contact_view(request):
     return render(request, 'main/contact.html')
 
 
-def HR_view(request):
-    return render(request, 'main/HR.html')
+def hr_view(request):
+    return render(request, 'main/hr.html')
 
 def post_view(request):
     return render(request, 'main/post.html')
@@ -50,73 +50,7 @@ def production_view(request):
 def consult_view(request):
     return render(request, 'main/consult.html')
 
-# @csrf_protect
-# def register_view(request):
-#     if request.method == 'POST':
-#         username = request.POST['username']
-#         email = request.POST['email']
-#         password = request.POST['password']
-#         confirm_password = request.POST['confirm_password']
-#         role = request.POST['role']
-        
-#         # Validation
-#         if password != confirm_password:
-#             messages.error(request, 'Passwords do not match')
-#             return redirect('register')
 
-#         # Check if the username already exists
-#         if User.objects.filter(username=username).exists():
-#             messages.error(request, 'Username already exists')
-#             return redirect('register')
-        
-#         # Check if the email already exists
-#         if User.objects.filter(email=email).exists():
-#             messages.error(request, 'Email already registered')
-#             return redirect('register')
-
-#         # Save the user with a hashed password
-#         hashed_password = make_password(password)
-#         user = User(username=username, email=email, password=hashed_password, role=role)
-#         user.save()
-
-#         messages.success(request, 'Registration successful. Please sign in.')
-#         return redirect('signin')
-
-#     return render(request, 'main/register.html')
-
-
-# @csrf_protect
-# def signin_view(request):
-#     if request.method == 'POST':
-#         username = request.POST.get('username')
-#         password = request.POST.get('password')
-
-#         try:
-#             user = User.objects.get(username=username)
-
-#             # Check if the password is valid
-#             if check_password(password, user.password):
-#                 # Store user info in the session
-#                 request.session['username'] = user.username
-#                 messages.success(request, 'Sign In successful')
-
-#                 # Redirect to 'next' if it exists in the GET parameters
-#                 next_url = request.GET.get('job')
-#                 if next_url:
-#                     return redirect(next_url)
-#                 else:
-#                     return redirect('index')
-#             else:
-#                 messages.error(request, 'Invalid password')
-#         except User.DoesNotExist:
-#             messages.error(request, 'User does not exist')
-
-#     return render(request, 'main/signin.html')
-
-# def logout_view(request):
-#     logout(request)
-#     messages.success(request, 'Logged out successfully')
-#     return redirect('signin')
 @csrf_protect
 def register_view(request):
     if request.method == 'POST':
