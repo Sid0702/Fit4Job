@@ -1,0 +1,201 @@
+<!-- job_application.html -->
+{% extends 'base.html' %}
+
+{% block content %}
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/4cce9f2fd3.js"></script>
+    <link href="https://kit-free.fontawesome.com/releases/latest/css/free-v4-shims.min.css" media="all" rel="stylesheet">
+    <link href="https://kit-free.fontawesome.com/releases/latest/css/free-v4-font-face.min.css" media="all" rel="stylesheet">
+    <link href="https://kit-free.fontawesome.com/releases/latest/css/free.min.css" media="all" rel="stylesheet">
+    
+    <style>
+        /* Reset some default styles */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f0f2f5; /* Light background color */
+        }
+
+        .container {
+            max-width: 800px; /* Adjust to your preference */
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Apply Form Styles */
+        .apply-form-elements {
+            background-color: #ffffff; /* White background for form */
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+
+        .apply-form-title {
+            font-size: 24px;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 20px; /* Add some margin below */
+        }
+
+        .apply-form-close-btn {
+            cursor: pointer;
+            float: right; /* Align to the right */
+            font-size: 20px;
+            color: #007bff; /* Change to a color for visibility */
+        }
+
+        .apply-form-content-element {
+            margin-top: 20px;
+        }
+
+        .apply-form-group {
+            margin-bottom: 15px;
+        }
+
+        .apply-form-group-txt h1 {
+            margin: 0;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        .apply-form-group input,
+        .apply-form-group textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ced4da;
+            border-radius: 4px;
+            font-size: 14px;
+            transition: border-color 0.3s;
+        }
+
+        .apply-form-group input:focus,
+        .apply-form-group textarea:focus {
+            border-color: #80bdff;
+            outline: none;
+        }
+
+        .upload-btn-folder {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .cv-folder, .testimony-folder {
+            margin: 10px 0;
+        }
+
+        .cv-box, .testimony-box {
+            background-color: #e9ecef;
+            padding: 15px;
+            border-radius: 5px;
+            text-align: center;
+        }
+
+        .upload-btn-label {
+            cursor: pointer;
+        }
+
+        .upload-btn-input {
+            display: none; /* Hide the default input */
+        }
+
+        .upload-elements {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .upload-elements h5 {
+            margin: 5px 0;
+            font-size: 12px;
+            color: #6c757d;
+        }
+
+        .submit {
+            margin-top: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            background-color: #007bff;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+
+        .btn:hover {
+            background-color: #0056b3;
+        }
+
+        .apply-form-footer-element {
+            margin-top: 20px;
+            text-align: center;
+            font-size: 12px;
+            color: #6c757d;
+        }
+        .spacer {
+            height: 90px; /* Adjust this height based on your navbar height */
+        }
+    </style>
+</head>
+
+<!-- Job Application Form -->
+<div class="apply-form-elements">
+    <div class="apply-form-body">
+        <div class="spacer"></div>
+        <div class="apply-form-title">
+            CV Submission
+            <div class="apply-form-close-btn">
+                <a href="#" class="closebtn">×</a>
+            </div>
+        </div>
+        <section class="apply-form-content-element">
+            <div class="apply-form-contact-box">
+                <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="apply-form-group">
+                        <label>First Name</label>
+                        <input type="text" name="firstname" placeholder="First Name" required>
+                    </div>
+                    <div class="apply-form-group">
+                        <label>Last Name</label>
+                        <input type="text" name="lastname" placeholder="Last Name" required>
+                    </div>
+                    <div class="apply-form-group">
+                        <label>Email Address</label>
+                        <input type="email" name="email" placeholder="Email Address" required>
+                    </div>
+                    <div class="apply-form-group">
+                        <label>Phone Number</label>
+                        <input type="text" name="phonenumber" placeholder="Phone Number" required>
+                    </div>
+                    <div class="apply-form-group">
+                        <label>Position Applying For</label>
+                        <input type="text" name="position-applying-for" placeholder="Position Applying For" required>
+                    </div>
+                    <div class="apply-form-group">
+                        <label>Additional Information</label>
+                        <textarea name="message" placeholder="Additional Information" required></textarea>
+                    </div>
+                    <div class="upload-btn-folder">
+                        <label>Upload your CV Here</label>
+                        <input type="file" name="cv" required>
+                    </div>
+                    <div class="submit">
+                        <input type="submit" value="SUBMIT">
+                    </div>
+                </form>
+            </div>
+        </section>
+        <footer class="apply-form-footer-element"></footer>
+    </div>
+</div>
+{% endblock %}

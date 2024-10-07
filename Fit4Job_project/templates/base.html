@@ -5,9 +5,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Fit4Job{% endblock %}</title>
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style copy.css' %}">
     <link rel="stylesheet" href="{% static 'css/job_category.css' %}">
     <link rel="stylesheet" href="{% static 'css/about.css' %}">
+    <link rel="stylesheet" href="{% static 'css/job.css' %}">
 
     <script src="{% static 'js/script.js' %}" defer></script>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
@@ -29,12 +30,14 @@
             </nav>
             <ul>
                 {% if request.session.username %}
+                    {% if request.session.role == 'recruiter' %}
+                        <a href="{% url 'hr_dashboard' %}" class="sign-in-btn">HR Dashboard</a>
+                    {% endif %}
                     <a href="{% url 'logout' %}" class="sign-in-btn">Logout</a>
                 {% else %}
                     <a href="{% url 'signin' %}" class="sign-in-btn">Sign In Now</a>
                     <a href="{% url 'register' %}" class="sign-in-btn">Register Now</a>
                 {% endif %}
-            </ul>
         </div>
     </header>
     <!-- Content Block -->

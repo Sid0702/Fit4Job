@@ -1,0 +1,163 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<style>
+    body {
+        font-family: 'Arial', sans-serif;
+        background-color: #f9f9f9;
+        margin: 0;
+        padding: 0;
+    }
+
+    /* Job masthead section styling */
+    .job-masthead {
+        background-color: #0056b3; /* Primary color */
+        padding: 80px 0;
+        color: white;
+        text-align: center;
+    }
+
+    .job-masthead .job-heading {
+        font-size: 42px;
+        font-weight: 700;
+        margin-bottom: 10px;
+    }
+
+    .job-masthead .job-subheading {
+        font-size: 18px;
+        font-weight: 300;
+    }
+
+    /* Job listing section styling */
+    .job-listings-container {
+        list-style: none;
+        padding: 0;
+        margin-top: 30px;
+    }
+
+    .job-item-card {
+        background-color: #fff;
+        border-radius: 8px;
+        margin-bottom: 20px;
+        padding: 25px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+        transition: box-shadow 0.3s ease;
+        display: flex;
+        flex-direction: column;
+        border-left: 4px solid #007bff; /* Accent color */
+    }
+
+    .job-item-card:hover {
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .job-item-title {
+        font-size: 20px;
+        font-weight: 600;
+        margin: 0;
+        color: #333;
+    }
+
+    .job-item-company,
+    .job-item-location {
+        font-size: 14px;
+        font-weight: 400;
+        margin-top: 5px;
+        color: #555;
+    }
+
+    .job-item-description {
+        margin-top: 15px;
+        font-size: 13px;
+        color: #555;
+    }
+
+    .job-item-meta {
+        font-size: 13px;
+        color: #777;
+        margin-top: 10px;
+    }
+
+    .job-item-meta strong {
+        color: #333;
+    }
+
+    .btn-apply-job {
+        background-color: #28a745; /* Green button */
+        color: white;
+        padding: 8px 20px;
+        border-radius: 40px;
+        text-decoration: none;
+        font-size: 14px;
+        margin-top: 15px;
+        transition: background-color 0.3s ease;
+        align-self: flex-start;
+    }
+
+    .btn-apply-job:hover {
+        background-color: #218838;
+    }
+
+    /* Responsive styling */
+    @media screen and (max-width: 768px) {
+        .job-item-card {
+            flex-direction: column;
+            text-align: left;
+        }
+
+        .btn-apply-job {
+            margin-top: 10px;
+        }
+    }
+</style>
+
+<!-- Job Masthead Section -->
+<div class="job-masthead">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-10 offset-md-1">
+                <div class="job-heading-container">
+                    <h1 class="job-heading">Open Positions</h1>
+                    <span class="job-subheading">Current listings for available job roles.</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Job Listings Section -->
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-10 offset-md-1">
+                <ul class="job-listings-container">
+                    {% for job in jobs %}
+                    <li class="job-item-card">
+                        <div class="job-content">
+                            <h4 class="job-item-title">{{ job.title }}</h4>
+                            <h5 class="job-item-company">{{ job.company }}</h5>
+                            <p class="job-item-location">{{ job.location }}</p>
+                            <p class="job-item-description">{{ job.description }}</p>
+                            <p class="job-item-meta">
+                                <strong>Job Type:</strong> {{ job.job_type }} |
+                                <strong>Salary:</strong> {{ job.salary }} |
+                                <strong>Posted on:</strong> {{ job.created_at|date:"F d, Y" }} <!-- Using created_at -->
+                            </p>
+                        </div>
+                        <a href="{% url 'apply_for_job' job.id %}" class="btn-apply-job">Apply Now</a>
+                    </li>
+                    {% empty %}
+                    <li class="job-item-card">
+                        <div class="job-content">
+                            <h4 class="job-item-title">No available positions</h4>
+                            <h5 class="job-item-company">Check back later for updates</h5>
+                        </div>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock content %}

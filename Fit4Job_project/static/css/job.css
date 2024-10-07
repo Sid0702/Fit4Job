@@ -1,0 +1,96 @@
+/* Custom Job List Styles */
+.job-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.job-list .job-preview {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    padding: 15px;
+    margin-bottom: 15px;
+    border-radius: 8px;
+    transition: box-shadow 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+}
+
+.job-list .job-preview:hover {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+}
+
+.job-list .job-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #333;
+}
+
+.job-list .company {
+    font-size: 1rem;
+    color: #777;
+}
+
+.job-list .btn-apply {
+    padding: 10px 20px;
+    background-color: #3b82f6;
+    color: white;
+    border: none;
+    border-radius: 25px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: background-color 0.3s ease;
+}
+
+.job-list .btn-apply:hover {
+    background-color: #005ecb;
+}
+
+@media (max-width: 768px) {
+    .job-list .job-preview {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .job-list .btn-apply {
+        margin-top: 10px;
+    }
+}
+/* Introductory Section Styles */
+.intro-section {
+    background-color: #f0f0f0;
+    padding: 60px 0;
+    text-align: center;
+}
+
+.intro-section .intro-heading {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.intro-section .intro-description {
+    font-size: 1.2rem;
+    color: #666;
+    max-width: 800px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .intro-section {
+        padding: 40px 0;
+    }
+
+    .intro-section .intro-heading {
+        font-size: 2rem;
+    }
+
+    .intro-section .intro-description {
+        font-size: 1rem;
+    }
+}

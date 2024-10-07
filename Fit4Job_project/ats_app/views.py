@@ -1,10 +1,11 @@
-from django.shortcuts import render, redirect
+
+import re
+from django.shortcuts import render, redirect,get_object_or_404
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required  # Import login_required
 from django.views.decorators.csrf import csrf_protect
-from .models import User
+from .models import *
 from django.contrib.auth.hashers import make_password, check_password
-# from django.contrib.auth import authenticate, login, logout
 
 def index(request):
     return render(request, 'main/index.html')
@@ -12,44 +13,37 @@ def index(request):
 def about_view(request):
     return render(request, 'main/about.html')
 
-@login_required(login_url='signin')  # Add login_required to protect the job page
-def job_view(request):
-    return render(request, 'main/job.html')
-
 def contact_view(request):
     return render(request, 'main/contact.html')
 
+def hr_dashboard(request):
+    if request.session.get('role') == 'recruiter':
+        jobs = Job.objects.all()
+        return render(request, 'main/hr_dashboard.html', {'jobs': jobs})
+    else:
+        messages.error(request, 'Access denied. HR only.')
+        return redirect('job')
 
-def hr_view(request):
-    return render(request, 'main/hr.html')
+def post_job(request):
+    if request.method == 'POST':
+        title = request.POST['job_title']
+        description = request.POST['job_description']
+        job_type = request.POST['job_type']
+        location = request.POST['location']
+        skills = request.POST['skills']
+        salary = request.POST['salary']
 
-def post_view(request):
-    return render(request, 'main/post.html')
+        # Handle multiple delimiters (comma, space, newline)
+        skill_list = re.split(r'[,\s\n]+', skills.strip()) if skills else []
+        skills_cleaned = ', '.join(skill_list)  # Join the cleaned skill list
 
-@login_required(login_url='signin')  # Protect individual job category pages
-def programmer_view(request):
-    return render(request, 'main/programmer.html')
-
-@login_required(login_url='signin')
-def education_view(request):
-    return render(request, 'main/education.html')
-
-@login_required(login_url='signin')
-def design_view(request):
-    return render(request, 'main/design.html')
-
-@login_required(login_url='signin')
-def finance_view(request):
-    return render(request, 'main/finance.html')
-
-@login_required(login_url='signin')
-def production_view(request):
-    return render(request, 'main/production.html')
-
-@login_required(login_url='signin')
-def consult_view(request):
-    return render(request, 'main/consult.html')
-
+        # Save job post with cleaned skills
+        job = Job(title=title, description=description, job_type=job_type, location=location, skills=skills_cleaned, salary=salary)
+        job.save()
+        messages.success(request, 'Job posted successfully!')
+        return redirect('hr_dashboard')
+    
+    return render(request, 'main/job_form.html')
 
 @csrf_protect
 def register_view(request):
@@ -83,7 +77,6 @@ def register_view(request):
 
     return render(request, 'main/register.html')
 
-
 @csrf_protect
 def signin_view(request):
     if request.method == 'POST':
@@ -93,17 +86,22 @@ def signin_view(request):
         try:
             user = User.objects.get(username=username)
             if check_password(password, user.password):
-                # Store user info in the session
+                # Store user info in the session, including the role
                 request.session['username'] = user.username
+                request.session['role'] = user.role
                 messages.success(request, 'Sign In successful')
-                return redirect('job')  # Redirect to job view after successful sign in
+
+                if user.role == 'recruiter':
+                    return redirect('hr_dashboard')  # Redirect HR users to the HR dashboard
+                else:
+                    return redirect('index')  # Redirect other users to job view
+
             else:
                 messages.error(request, 'Invalid password')
         except User.DoesNotExist:
             messages.error(request, 'User does not exist')
 
     return render(request, 'main/signin.html')
-
 
 def logout_view(request):
     # Clear the session data
@@ -124,4 +122,51 @@ def is_authenticated(view_func):
 # Apply the decorator to the job view
 @is_authenticated
 def job_view(request):
-    return render(request, 'main/job.html')
+    jobs = Job.objects.all()
+    return render(request, 'main/job_list.html', {'jobs': jobs})
+
+def delete_job(request, job_id):
+    job = Job.objects.get(id=job_id)
+    job.delete()
+    messages.success(request, 'Job deleted successfully!')
+    return redirect('hr_dashboard')
+
+def edit_job(request, job_id):
+    job = Job.objects.get(id=job_id)
+    
+    if request.method == 'POST':
+        job.title = request.POST['job_title']
+        job.description = request.POST['job_description']
+        job.job_type = request.POST['job_type']
+        job.location = request.POST['location']
+        skills = request.POST['skills']
+        job.salary = request.POST['salary']
+
+        # Handle multiple delimiters (comma, space, newline)
+        skill_list = re.split(r'[,\s\n]+', skills.strip()) if skills else []
+        job.skills = ', '.join(skill_list)  # Update the cleaned skill list
+
+        job.save()
+        
+        messages.success(request, 'Job updated successfully!')
+        return redirect('hr_dashboard')
+    
+    return render(request, 'main/edit_job.html', {'job': job})
+
+def apply_for_job(request, job_id):
+    job = get_object_or_404(Job, id=job_id)
+    print(f"Rendering apply_form.html for job: {job.title}")
+    if request.method == 'POST':
+        name = request.POST.get('name')
+        email = request.POST.get('email')
+        resume = request.FILES.get('resume')
+
+        # Create the application
+        Application.objects.create(job=job, name=name, email=email, resume=resume)
+        
+        # Redirect to a success page or job listing
+        return redirect('job_list')  # Change this to your desired URL after successful submission
+
+    return render(request, 'main/apply_form.html', {'job': job})
+
+
