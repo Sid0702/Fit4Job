@@ -18,7 +18,8 @@ def contact_view(request):
 
 def hr_dashboard(request):
     if request.session.get('role') == 'recruiter':
-        jobs = Job.objects.all()
+        user = User.objects.get(username=request.session.get('username'))
+        jobs = Job.objects.filter(user=user.id)
         return render(request, 'main/hr_dashboard.html', {'jobs': jobs})
     else:
         messages.error(request, 'Access denied. HR only.')
@@ -36,9 +37,10 @@ def post_job(request):
         # Handle multiple delimiters (comma, space, newline)
         skill_list = re.split(r'[,\s\n]+', skills.strip()) if skills else []
         skills_cleaned = ', '.join(skill_list)  # Join the cleaned skill list
+        user = User.objects.get(username=request.session.get('username'))
 
         # Save job post with cleaned skills
-        job = Job(title=title, description=description, job_type=job_type, location=location, skills=skills_cleaned, salary=salary)
+        job = Job(title=title, description=description, job_type=job_type, location=location, skills=skills_cleaned, salary=salary,user=user)
         job.save()
         messages.success(request, 'Job posted successfully!')
         return redirect('hr_dashboard')
@@ -68,10 +70,10 @@ def register_view(request):
             return redirect('register')
 
         # Save the user with a hashed password
+        
         hashed_password = make_password(password)
-        user = User(username=username, email=email, password=hashed_password, role=role)
+        user = User.objects.create(username=username, email=email, password=hashed_password, role=role)
         user.save()
-
         messages.success(request, 'Registration successful. Please sign in.')
         return redirect('signin')
 
@@ -156,16 +158,32 @@ def edit_job(request, job_id):
 def apply_for_job(request, job_id):
     job = get_object_or_404(Job, id=job_id)
     print(f"Rendering apply_form.html for job: {job.title}")
+    
     if request.method == 'POST':
-        name = request.POST.get('name')
+        user = User.objects.get(username=request.session.get('username'))
+        first_name = request.POST.get('firstname')
+        last_name = request.POST.get('lastname')
         email = request.POST.get('email')
-        resume = request.FILES.get('resume')
+        phone_number = request.POST.get('phonenumber')
+        position_applying_for = request.POST.get('position-applying-for')
+        message = request.POST.get('message')
+        cv = request.FILES.get('cv')
 
         # Create the application
-        Application.objects.create(job=job, name=name, email=email, resume=resume)
-        
+        job = JobApplication.objects.create(
+            user=user,
+            first_name=first_name,
+            last_name=last_name,
+            email=email,
+            phone_number=phone_number,
+            position_applying_for=position_applying_for,
+            message=message,
+            cv=cv
+        )
+        job.save()
+        print("Applied")
         # Redirect to a success page or job listing
-        return redirect('job_list')  # Change this to your desired URL after successful submission
+        return redirect('job')  # Change this to your desired URL after successful submission
 
     return render(request, 'main/apply_form.html', {'job': job})
 
