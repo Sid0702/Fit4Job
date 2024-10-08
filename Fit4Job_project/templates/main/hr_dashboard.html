@@ -272,12 +272,10 @@ body {
         <div class="new-sidebar" id="new-sidebar">
             <h2>HR Dashboard</h2>
             <ul>
-                <li style="color: white !important;">
-                    User: {{ request.session.username }}
-                </li>
-                <li><a href="#"><i class="fas fa-home"></i><span>Dashboard</span></a></li>
+                <li><a href="#"><i class="fas fa-home"></i><span>{{ request.session.username }}</span></a></li>
+                <li><a href="{% url 'hr_dashboard' %}"><i class="fas fa-home"></i><span>Dashboard</span></a></li>
                 <li><a href="#"><i class="fas fa-briefcase"></i><span>Jobs</span></a></li>
-                <li><a href="#"><i class="fas fa-users"></i><span>Applicants</span></a></li>
+                <li><a href="{% url 'applicant' %}"><i class="fas fa-users"></i><span>Applicants</span></a></li>
             </ul>
             <button class="new-toggle-btn" id="new-toggle-btn">&#9664;</button>
         </div>
@@ -298,13 +296,16 @@ body {
                         <div class="job-info">
                             <h4><b>Title:</b> {{ job.title }}</h4>
                             <p><b>Description:</b> {{ job.description }}</p>
+                            <p><b>Job Type:</b> {{ job.job_type }}</p>
                             <p><b>Salary:</b> {{ job.salary }}</p>
+                            <p><b>Skills:</b> {{ job.skills }}</p>
+                            <p><b>Location:</b> {{ job.location }}</p>
                         </div>
                 
                         <!-- Right section with buttons -->
                         <div class="job-actions">
                             <a href="{% url 'edit_job' job.id %}" class="new-btn">Edit</a>
-                            <a href="{% url 'delete_job' job.id %}" class="new-btn delete-btn">Delete</a>
+                            <a href="{% url 'delete_job' job.id %}" class="new-btn delete-btn" onclick="alert('Do you want to delete the job post?')">Delete</a>
                         </div>
                     </li>
                     {% endfor %}

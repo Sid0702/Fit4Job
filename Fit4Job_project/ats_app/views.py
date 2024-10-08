@@ -187,4 +187,11 @@ def apply_for_job(request, job_id):
 
     return render(request, 'main/apply_form.html', {'job': job})
 
+# def user_job_list(request):
 
+#     user_jobs = Job.objects.filter(user=user)  # Assuming you have a 'posted_by' field in Job model
+#     return render(request, 'main/job_list.html', {'user_jobs': user_jobs})
+
+def applicant_view(request):
+    jobs = Job.objects.filter()
+    return render(request,'main/applicants.html', {"jobs" : jobs})
