@@ -281,7 +281,7 @@
             <ul>
                 <li><a href="#"><i class="fas fa-home"></i><span>{{ request.session.username }}</span></a></li>
                 <li><a href="{% url 'hr_dashboard' %}"><i class="fas fa-home"></i><span>Dashboard</span></a></li>
-                <li><a href="#"><i class="fas fa-briefcase"></i><span>Jobs</span></a></li>
+                <li><a href="{% url 'job' %}"><i class="fas fa-briefcase"></i><span>Jobs</span></a></li>
                 <li><a href="{% url 'applicant' %}"><i class="fas fa-users"></i><span>Applicants</span></a></li>
             </ul>
             <button class="new-toggle-btn" id="new-toggle-btn">&#9664;</button>
