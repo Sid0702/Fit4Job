@@ -4,312 +4,342 @@
 {% block content %}
 <style>
     body {
-    font-family: 'Arial', sans-serif;
-    background-color: #f9f9f9; /* Light grey background for the body */
-    margin: 0;
-    padding: 0;
-}
-
-/* Masthead Section Styling */
-.job-masthead {
-    background-color: #2f5e87; /* Light blue background for masthead */
-    padding: 80px 0;
-    color: #fff; /* Blue color for text */
-    text-align: center;
-    position: relative; /* For absolute positioning of shapes */
-    border-radius: 8px;
-}
-
-/* Animated Background Shapes */
-.job-masthead::before,
-.job-masthead::after {
-    content: "";
-    position: absolute;
-    top: -50px;
-    left: -50px;
-    width: 300px;
-    height: 300px;
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 50%;
-    z-index: 1;
-    animation: floatShapes 10s infinite ease-in-out;
-}
-
-.job-masthead::after {
-    top: auto;
-    bottom: -50px;
-    right: -50px;
-    left: auto;
-    animation-duration: 12s;
-}
-
-@keyframes floatShapes {
-    0%, 100% {
-        transform: translateY(0) rotate(0);
+        font-family: 'Arial', sans-serif;
+        background-color: #f9f9f9;
+        /* Light grey background for the body */
+        margin: 0;
+        padding: 0;
     }
-    50% {
-        transform: translateY(-20px) rotate(180deg);
+
+    /* Masthead Section Styling */
+    .job-masthead {
+        background-color: #2f5e87;
+        /* Light blue background for masthead */
+        padding: 80px 0;
+        color: #fff;
+        /* Blue color for text */
+        text-align: center;
+        position: relative;
+        /* For absolute positioning of shapes */
+        border-radius: 8px;
     }
-}
 
-.job-heading {
-    font-size: 42px;
-    font-weight: 700;
-    margin-bottom: 10px;
-    z-index: 2;
-    position: relative;
-    animation: fadeInDown 1.5s ease;
-}
+    /* Animated Background Shapes */
+    .job-masthead::before,
+    .job-masthead::after {
+        content: "";
+        position: absolute;
+        top: -50px;
+        left: -50px;
+        width: 300px;
+        height: 300px;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 50%;
+        z-index: 1;
+        animation: floatShapes 10s infinite ease-in-out;
+    }
 
-.job-subheading {
-    font-size: 18px;
-    font-weight: 300;
-    z-index: 2;
-    position: relative;
-    animation: fadeInUp 1.5s ease;
-}
+    .job-masthead::after {
+        top: auto;
+        bottom: -50px;
+        right: -50px;
+        left: auto;
+        animation-duration: 12s;
+    }
 
-/* Job Listings Container */
-.job-listings-container {
-    list-style: none;
-    padding: 0;
-    margin-top: 30px;
-}
+    @keyframes floatShapes {
 
-/* Job Item Card */
-.job-item-card {
-    background-color: #fff; /* White background for cards */
-    border-radius: 8px;
-    margin-bottom: 20px;
-    padding: 25px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
-    transition: box-shadow 0.3s ease;
-    /* display: flex; */
-    flex-direction: column;
-    border-left: 4px solid #007bff;
-}
+        0%,
+        100% {
+            transform: translateY(0) rotate(0);
+        }
 
-.job-item-card:hover {
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-}
+        50% {
+            transform: translateY(-20px) rotate(180deg);
+        }
+    }
 
-.job-item-title {
-    font-size: 20px;
-    font-weight: 600;
-    margin: 0;
-    color: #333; /* Darker text for title */
-    margin-bottom: 10px;
-}
+    .job-heading {
+        font-size: 42px;
+        font-weight: 700;
+        margin-bottom: 10px;
+        z-index: 2;
+        position: relative;
+        animation: fadeInDown 1.5s ease;
+    }
 
-.job-item-company,
-.job-item-location {
-    font-size: 14px;
-    font-weight: 400;
-    margin-top: 5px;
-    color: #555; /* Grey color for company and location */
-}
+    .job-subheading {
+        font-size: 18px;
+        font-weight: 300;
+        z-index: 2;
+        position: relative;
+        animation: fadeInUp 1.5s ease;
+    }
 
-.job-item-description {
-    font-size: 14px;
-    font-weight: 400;
-    margin-top: 5px;
-    color: #555; /* Grey color for description */
-}
+    /* Job Listings Container */
+    .job-listings-container {
+        list-style: none;
+        padding: 0;
+        margin-top: 30px;
+    }
 
-.job-item-meta {
-    font-size: 13px;
-    color: #777; /* Lighter grey for meta info */
-    margin-top: 10px;
-}
+    /* Job Item Card */
+    .job-item-card {
+        background-color: #fff;
+        /* White background for cards */
+        border-radius: 8px;
+        margin-bottom: 20px;
+        padding: 25px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+        transition: box-shadow 0.3s ease;
+        /* display: flex; */
+        flex-direction: column;
+        border-left: 4px solid #007bff;
+    }
 
-.job-item-meta strong {
-    color: #333; /* Darker text for emphasis */
-}
+    .job-item-card:hover {
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    }
 
-/* Apply Job Button */
-.btn-apply-job {
-    background-color: #28a745; /* Green color for apply button */
-    color: white;
-    padding: 8px 20px;
-    border-radius: 40px;
-    text-decoration: none;
-    font-size: 14px;
-    margin-top: 15px;
-    transition: background-color 0.3s ease;
-    align-self: flex-start;
-}
+    .job-item-title {
+        font-size: 20px;
+        font-weight: 600;
+        margin: 0;
+        color: #333;
+        /* Darker text for title */
+        margin-bottom: 10px;
+    }
 
-.btn-apply-job:hover {
-    background-color: #218838; /* Darker green on hover */
-}
+    .job-item-company,
+    .job-item-location {
+        font-size: 14px;
+        font-weight: 400;
+        margin-top: 5px;
+        color: #555;
+        /* Grey color for company and location */
+    }
 
-/* Pagination */
-.pagination {
-    text-align: center;
-    margin-top: 20px;
-}
+    .job-item-description {
+        font-size: 14px;
+        font-weight: 400;
+        margin-top: 5px;
+        color: #555;
+        /* Grey color for description */
+    }
 
-.pagination .step-links {
-    display: inline-block;
-    margin: 0;
-    padding: 0;
-}
+    .job-item-meta {
+        font-size: 13px;
+        color: #777;
+        /* Lighter grey for meta info */
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
 
-.pagination .step-links a {
-    padding: 8px 12px;
-    margin: 2px;
-    text-decoration: none;
-    border: 1px solid #ddd;
-    background-color: #f4f4f4;
-    color: #007bff; /* Blue for pagination links */
-}
+    .job-item-meta strong {
+        color: #333;
+        /* Darker text for emphasis */
+    }
 
-.pagination .step-links .current-page {
-    padding: 8px 12px;
-    margin: 2px;
-    background-color: #007bff; /* Highlight for current page */
-    color: white;
-    border: 1px solid #007bff;
-}
+    /* Apply Job Button */
+    .btn-apply-job {
+        background-color: #28a745;
+        /* Green color for apply button */
+        color: white;
+        padding: 8px 20px;
+        border-radius: 40px;
+        text-decoration: none;
+        font-size: 14px;
+        margin-top: 15px;
+        transition: background-color 0.3s ease;
+        align-self: flex-start;
+    }
 
-/* New Job Badge */
-.new-job-badge {
-    background-color: #ffc107; /* Yellow for new job badge */
-    color: white;
-    padding: 5px 10px;
-    font-size: 12px;
-    border-radius: 20px;
-    margin-left: 10px;
-}
+    .btn-apply-job:hover {
+        background-color: #218838;
+        /* Darker green on hover */
+    }
 
-/* Search Form Styling */
-.search-form {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 20px 0;
-}
+    /* Pagination */
+    .pagination {
+        text-align: center;
+        margin-top: 20px;
+    }
 
-.search-input {
-    width: 330px;
-    padding: 10px;
-    border: 2px solid #007bff; /* Blue border */
-    border-radius: 30px;
-    font-size: 16px;
-    outline: none;
-    transition: all 0.3s ease;
-}
+    .pagination .step-links {
+        display: inline-block;
+        margin: 0;
+        padding: 0;
+    }
 
-.search-input:focus {
-    border-color: #0056b3; /* Darker blue on focus */
-    box-shadow: 0 0 10px rgba(0, 123, 255, 0.2);
-}
+    .pagination .step-links a {
+        padding: 8px 12px;
+        margin: 2px;
+        text-decoration: none;
+        border: 1px solid #ddd;
+        background-color: #f4f4f4;
+        color: #007bff;
+        /* Blue for pagination links */
+    }
 
-.btn-search {
-    background-color: #28a745; /* Green for search button */
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    margin-left: 10px;
-    border-radius: 30px;
-    font-size: 16px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
+    .pagination .step-links .current-page {
+        padding: 8px 12px;
+        margin: 2px;
+        background-color: #007bff;
+        /* Highlight for current page */
+        color: white;
+        border: 1px solid #007bff;
+    }
 
-.btn-search:hover {
-    background-color: #218838; /* Darker green on hover */
-}
+    /* New Job Badge */
+    .new-job-badge {
+        background-color: #ffc107;
+        /* Yellow for new job badge */
+        color: white;
+        padding: 8px 20px;
+        font-size: 14px;
+        border-radius: 20px;
+    }
 
-/* Responsive styling */
-@media screen and (max-width: 768px) {
+    /* Search Form Styling */
+    .search-form {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 20px 0;
+    }
+
     .search-input {
-        width: 100%;
+        width: 330px;
+        padding: 10px;
+        border: 2px solid #007bff;
+        /* Blue border */
+        border-radius: 30px;
+        font-size: 16px;
+        outline: none;
+        transition: all 0.3s ease;
+    }
+
+    .search-input:focus {
+        border-color: #0056b3;
+        /* Darker blue on focus */
+        box-shadow: 0 0 10px rgba(0, 123, 255, 0.2);
     }
 
     .btn-search {
-        width: 100%;
-        margin-top: 10px;
+        background-color: #28a745;
+        /* Green for search button */
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        margin-left: 10px;
+        border-radius: 30px;
+        font-size: 16px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
     }
 
-    .search-form {
-        flex-direction: column;
+    .btn-search:hover {
+        background-color: #218838;
+        /* Darker green on hover */
     }
-}
 
-/* Fade Animations */
-@keyframes fadeInDown {
-    0% {
-        opacity: 0;
-        transform: translateY(-30px);
+    /* Responsive styling */
+    @media screen and (max-width: 768px) {
+        .search-input {
+            width: 100%;
+        }
+
+        .btn-search {
+            width: 100%;
+            margin-top: 10px;
+        }
+
+        .search-form {
+            flex-direction: column;
+        }
     }
-    100% {
-        opacity: 1;
-        transform: translateY(0);
+
+    /* Fade Animations */
+    @keyframes fadeInDown {
+        0% {
+            opacity: 0;
+            transform: translateY(-30px);
+        }
+
+        100% {
+            opacity: 1;
+            transform: translateY(0);
+        }
     }
-}
 
-@keyframes fadeInUp {
-    0% {
-        opacity: 0;
-        transform: translateY(30px);
+    @keyframes fadeInUp {
+        0% {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        100% {
+            opacity: 1;
+            transform: translateY(0);
+        }
     }
-    100% {
-        opacity: 1;
-        transform: translateY(0);
+
+    /* Section Heading Styles */
+    .section-heading {
+        text-align: left;
+        margin-bottom: 40px;
+        padding: 20px;
+        /* Added padding for spacing */
+        background-color: #f8f9fa;
+        /* Light grey background for section */
+        border-radius: 8px;
+        /* Rounded corners */
     }
-}
 
-/* Section Heading Styles */
-.section-heading {
-    text-align: left;
-    margin-bottom: 40px;
-    padding: 20px; /* Added padding for spacing */
-    background-color: #f8f9fa; /* Light grey background for section */
-    border-radius: 8px; /* Rounded corners */
-}
+    .section-heading h4 {
+        font-size: 36px;
+        color: #1e90ff;
+        /* Blue color */
+        font-weight: 700;
+        margin-bottom: 20px;
+    }
 
-.section-heading h4 {
-    font-size: 36px;
-    color: #1e90ff; /* Blue color */
-    font-weight: 700;
-    margin-bottom: 20px;
-}
+    .section-heading h4 em {
+        font-style: normal;
+        color: #0056b3;
+        /* Darker Blue for emphasis */
+    }
 
-.section-heading h4 em {
-    font-style: normal;
-    color: #0056b3; /* Darker Blue for emphasis */
-}
+    .section-heading img {
+        margin-bottom: 20px;
+    }
 
-.section-heading img {
-    margin-bottom: 20px;
-}
+    .section-heading p {
+        font-size: 18px;
+        color: #555;
+        /* Grey color for paragraph text */
+        line-height: 1.8;
+    }
 
-.section-heading p {
-    font-size: 18px;
-    color: #555; /* Grey color for paragraph text */
-    line-height: 1.8;
-}
+    /* View Button */
+    .btn-view-job {
 
-/* View Button */
-.btn-view-job {
-    
-    background-color: #007bff; /* Blue color for view button */
-    color: white;
-    padding: 8px 15px;
-    border-radius: 40px;
-    text-decoration: none;
-    font-size: 14px;
-    margin-top: 15px;
-    transition: background-color 0.3s ease;
-    align-self: flex-start;
-}
+        background-color: #007bff;
+        /* Blue color for view button */
+        color: white;
+        padding: 8px 15px;
+        border-radius: 40px;
+        text-decoration: none;
+        font-size: 14px;
+        margin-top: 15px;
+        transition: background-color 0.3s ease;
+        align-self: flex-start;
+    }
 
-.btn-view-job:hover {
-    background-color: #0056b3; /* Darker blue on hover */
-}
-
-
+    .btn-view-job:hover {
+        background-color: #0056b3;
+        /* Darker blue on hover */
+    }
 </style>
 
 <div class="job-masthead">
@@ -320,32 +350,39 @@
             value="{{ request.GET.q }}">
         <button type="submit" class="btn-search">Search</button>
     </form>
-    </div>
+</div>
 
 <!-- Search Form -->
 
 
 <!-- Job Listings -->
+
 <ul class="job-listings-container">
     {% for job in page_obj %}
     <li class="job-item-card">
         <h2 class="job-item-title">{{ job.title }}</h2>
         <p class="job-item-location">Location: {{ job.location }}</p>
-        <!-- <p class="job-item-meta"><strong>Skills:</strong> {{ job.skills }}</p> -->
         <p class="job-item-meta"><strong>Salary:</strong> {{ job.salary }}</p>
-        <div class="job-item-meta"></div>
-            <strong>Posted on:</strong> {{ job.created_at }}
+        <div class="job-item-meta">
+            <strong>Posted on:</strong> {{ job.created_at|date:"d M Y" }}
         </div>
-        
+
         <!-- View Details Button -->
         <a href="{% url 'job_detail' job.id %}" class="btn-view-job">View Details</a>
+
+        <!-- Conditionally hide the Apply button for recruiters -->
+        {% if request.session.role != 'recruiter' %}
         <a href="{% url 'apply_for_job' job.id %}" class="btn-apply-job">Apply Now</a>
-        {% if job.created_at >= today %}
+        {% endif %}
+
+        <!-- Show "New" Badge if the job was posted today -->
+        {% if job.created_at.date == today %}
         <span class="new-job-badge">New</span>
         {% endif %}
     </li>
     {% endfor %}
 </ul>
+
 
 <!-- Pagination -->
 <div class="pagination">

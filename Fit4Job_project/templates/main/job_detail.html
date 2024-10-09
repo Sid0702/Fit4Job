@@ -15,7 +15,9 @@
     <h3 class="job-detail-heading">Required Skills</h3>
     <p class="job-detail-skills">{{ job.skills }}</p>
 
+    {% if request.session.role != 'recruiter' %}
     <a href="{% url 'apply_for_job' job.id %}" class="btn-apply">Apply Now</a>
+    {% endif %}
 </div>
 
 <style>

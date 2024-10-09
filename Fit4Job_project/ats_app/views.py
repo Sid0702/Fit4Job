@@ -10,6 +10,7 @@ from .models import Job
 from datetime import date
 from django.db.models import Q
 from django.core.paginator import Paginator
+from django.utils import timezone
 
 def index(request):
     return render(request, 'main/index.html')
@@ -129,7 +130,7 @@ def is_authenticated(view_func):
 @is_authenticated
 def job_view(request):
     query = request.GET.get('q', '')  # Search query
-    today = date.today()  # Current date for checking new jobs
+    today = timezone.now().date() # Current date for checking new jobs
 
     # Filter jobs based on search query for title, location, salary, and skills
     job_list = Job.objects.filter(
@@ -138,6 +139,8 @@ def job_view(request):
         Q(salary__icontains=query) |          # Search by salary
         Q(skills__icontains=query)            # Search by skills
     ) if query else Job.objects.all()
+
+    job_list = job_list.order_by('-created_at')
 
     # Pagination logic (show 5 jobs per page)
     paginator = Paginator(job_list, 5)
