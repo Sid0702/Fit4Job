@@ -221,8 +221,15 @@ def apply_for_job(request, job_id):
 #     return render(request, 'main/job_list.html', {'user_jobs': user_jobs})
 
 def applicant_view(request):
-    jobs = Job.objects.filter()
-    return render(request,'main/applicants.html', {"jobs" : jobs})
+    if request.session.get('role') == 'recruiter':
+        user = User.objects.get(username=request.session.get('username'))
+        jobs = Job.objects.filter(user=user)
+    else:
+        messages.error(request, 'Access denied. HR only.')
+        return redirect('job')
+
+    return render(request, 'main/applicants.html', {"jobs": jobs})
+
 
 def job_detail(request, job_id):
     # Get the specific job by ID or return 404 if not found
