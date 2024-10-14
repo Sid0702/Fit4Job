@@ -6,6 +6,11 @@ from django.contrib.auth.decorators import login_required  # Import login_requir
 from django.views.decorators.csrf import csrf_protect
 from .models import *
 from django.contrib.auth.hashers import make_password, check_password
+from .models import Job
+from datetime import date
+from django.db.models import Q
+from django.core.paginator import Paginator
+from django.utils import timezone
 
 def index(request):
     return render(request, 'main/index.html')
@@ -124,8 +129,31 @@ def is_authenticated(view_func):
 # Apply the decorator to the job view
 @is_authenticated
 def job_view(request):
-    jobs = Job.objects.all()
-    return render(request, 'main/job_list.html', {'jobs': jobs})
+    query = request.GET.get('q', '')  # Search query
+    today = timezone.now().date() # Current date for checking new jobs
+
+    # Filter jobs based on search query for title, location, salary, and skills
+    job_list = Job.objects.filter(
+        Q(title__icontains=query) |           # Search by title
+        Q(location__icontains=query) |        # Search by location
+        Q(salary__icontains=query) |          # Search by salary
+        Q(skills__icontains=query)            # Search by skills
+    ) if query else Job.objects.all()
+
+    job_list = job_list.order_by('-created_at')
+
+    # Pagination logic (show 5 jobs per page)
+    paginator = Paginator(job_list, 5)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+
+    # Render the template with the paginated jobs and the search query
+    return render(request, 'main/job_list.html', {
+        'page_obj': page_obj,
+        'query': query,
+        'today': today
+    })
+    # return render(request, 'main/job_list.html', {'jobs': jobs})
 
 def delete_job(request, job_id):
     job = Job.objects.get(id=job_id)
@@ -187,4 +215,25 @@ def apply_for_job(request, job_id):
 
     return render(request, 'main/apply_form.html', {'job': job})
 
+# def user_job_list(request):
 
+#     user_jobs = Job.objects.filter(user=user)  # Assuming you have a 'posted_by' field in Job model
+#     return render(request, 'main/job_list.html', {'user_jobs': user_jobs})
+
+def applicant_view(request):
+    if request.session.get('role') == 'recruiter':
+        user = User.objects.get(username=request.session.get('username'))
+        jobs = Job.objects.filter(user=user)
+    else:
+        messages.error(request, 'Access denied. HR only.')
+        return redirect('job')
+
+    return render(request, 'main/applicants.html', {"jobs": jobs})
+
+
+def job_detail(request, job_id):
+    # Get the specific job by ID or return 404 if not found
+    job = get_object_or_404(Job, id=job_id)
+    
+    # Render the job detail template
+    return render(request, 'main/job_detail.html', {'job': job})
