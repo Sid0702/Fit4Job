@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% load static %}
+<!-- {% load static %} -->
 
 {% block content %}
 <!DOCTYPE html>
@@ -9,25 +9,42 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contact Us</title>
     <style>
+        body {
+            background:linear-gradient(145deg, #3991e2, #ede9a8);; /* Light blue-grey for a soft backdrop */
+            font-family: Arial, sans-serif;
+            overflow: hidden; /* Prevent scrolling */
+            margin: 0;
+            padding: 0;
+            height: 100vh; /* Full viewport height */
+            display: flex;
+            justify-content: flex-start; /* Align items to the left */
+            align-items: center; /* Center vertically */
+        }
+
         .cont {
-            width: 600px;
-            margin: 0 auto;
+            width: 90%;
+            margin-left: 5rem;
             background: #fff;
-            margin-top: 7rem;
-            margin-bottom: 3rem;
+            display: flex;
+            height: 60%;
+            position: relative;
+            border-radius: 20px; /* Rounded edges for the form container */
+            border: 2px solid #f3e709; /* Yellow border */
         }
 
         #wrapper {
             padding: 2rem 3rem;
             display: flex;
+            width: 100%;
         }
 
         .contact-us {
-            background: #063564;
+            background: #01284f;
             color: #ffffff;
             padding: 2.5rem 3rem 2rem;
-            margin-left: -8rem;
             width: 40%;
+            min-width: 250px;
+            border-radius: 20px 0 0 20px; /* Match border radius on the left side */
         }
 
         .contact-us h2 {
@@ -59,7 +76,8 @@
 
         .get-in-touch {
             padding: .2rem 1rem 1rem 3rem;
-            width: 65%;
+            width: 60%;
+            border-radius: 0 20px 20px 0; /* Match border radius on the right side */
         }
 
         .get-in-touch h2 {
@@ -83,11 +101,11 @@
 
         .get-in-touch input,
         .get-in-touch textarea {
-            background: #b2cef9;
-            border: none;
+            background: #fff;
+            border: 2px solid #f1e951; /* Yellow border */
             padding: 15px;
             margin-bottom: 1rem;
-            border-radius: 10px;
+            border-radius: 15px; /* Rounded corners for form inputs */
         }
 
         .get-in-touch textarea {
@@ -108,6 +126,19 @@
 
         ::placeholder {
             color: #042648;
+        }
+
+        /* Background image */
+        .background-image {
+            background-image: url("{% static 'images/contct.png' %}");
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: right;
+            position: absolute;
+            right: 2;
+            top: 0;
+            bottom: 0;
+            width: 45%;
         }
     </style>
 </head>
@@ -130,11 +161,12 @@
                     <input type="text" placeholder="Your Name">
                     <input type="email" placeholder="Your Email">
                     <textarea placeholder="Type your message here"></textarea>
-                    <input type="submit" value="send">
+                    <input type="submit" value="Send">
                 </form>
             </div>
         </div>
     </div>
+    <div class="background-image"></div> <!-- Background image on the right -->
 </body>
 </html>
 {% endblock content %}

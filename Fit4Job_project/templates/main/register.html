@@ -10,6 +10,20 @@
       background-color: #f0f4f8; /* Light blue-grey for a soft backdrop */
       font-family: Arial, sans-serif;
       display: flex;
+      background-image: url("{% static 'images/gradi.jpg' %}");
+        
+        /* Full size background */
+        background-size: cover;
+        
+        /* Center the background image */
+        background-position: center;
+        
+        /* Ensure it covers the full page */
+        background-repeat: no-repeat;
+        height: 100vh; /* 100% of viewport height */
+        
+        /* Optionally, add a transparent overlay */
+        position: relative;
       justify-content: center;
       align-items: center;
       height: 100vh;
@@ -28,11 +42,11 @@
       flex-direction: column;
       align-items: center;
       transition: transform 0.3s ease-in-out, background-color 0.3s ease-in-out;
-      background: linear-gradient(145deg, #9bc0e2, #3687e5); /* Light blue gradient for subtle depth */
+      background: linear-gradient(145deg, #011c37, #92a4b9); /* Light blue gradient for subtle depth */
     }
 
     .register-box h2 {
-      color: #042648; /* Deep blue for the header */
+      color: #f4f6f8; /* Deep blue for the header */
       margin-bottom: 20px;
       font-size: 26px;
       letter-spacing: 1px;
