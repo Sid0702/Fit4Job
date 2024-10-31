@@ -144,7 +144,7 @@
                 <input type="text" id="full_name" name="full_name" value="{{ profile.full_name }}" required>
 
                 <label for="email">Email:</label>
-                <input type="email" id="email" name="email" value="{{ request.user.email }}" readonly>
+                <input type="email" id="email" name="email" value="{{ request.session.email }}" readonly>
 
                 <label for="phone_number">Phone Number:</label>
                 <input type="text" id="phone_number" name="phone_number" value="{{ profile.phone_number }}">

@@ -241,7 +241,6 @@ def job_detail(request, job_id):
     return render(request, 'main/job_detail.html', {'job': job})
 
 def profile_view(request):
-    # No need to check for is_authenticated if you are managing sessions manually
     if 'username' in request.session:
         user = User.objects.get(id=request.session['user_id'])
         profile, created = Profile.objects.get_or_create(user=user)
@@ -259,6 +258,12 @@ def profile_view(request):
             # Handle profile picture upload
             if 'profile_picture' in request.FILES:
                 profile.profile_picture = request.FILES['profile_picture']
+
+            # Update email if it has changed (optional)
+            email = request.POST.get('email')
+            if email and email != request.user.email:
+                request.user.email = email
+                request.user.save()
 
             profile.save()
             messages.success(request, 'Profile updated successfully!')

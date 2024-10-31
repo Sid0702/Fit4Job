@@ -12,6 +12,36 @@
 
     <script src="{% static 'js/script.js' %}" defer></script>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Style for the sign-in and register buttons */
+        .sign-in-btn {
+            display: inline-block; /* Ensures buttons don't overlap */
+            padding: 10px 20px; /* Adjust padding as needed */
+            margin: 5px; /* Adds spacing between buttons */
+            background-color: #4285f4; /* Button color */
+            color: white;
+            border-radius: 5px;
+            text-decoration: none;
+            text-align: center;
+        }
+
+        .sign-in-btn:hover {
+            background-color: #357ae8; /* Darkens color on hover */
+        }
+
+        .auth-buttons {
+            display: flex;
+            gap: 10px; /* Space between buttons */
+            list-style-type: none; /* Remove bullet points */
+            padding: 0; /* Remove padding */
+            margin: 0; /* Remove margin */
+        }
+
+        .auth-buttons li {
+            display: inline-block; /* Ensure buttons stay in a row */
+        }
+    </style>
 </head>
 
 <body>
@@ -26,22 +56,26 @@
                     <li><a href="{% url 'about' %}">About</a></li>
                     <li><a href="{% url 'job' %}">Job</a></li>
                     <li><a href="{% url 'contact' %}">Contact</a></li>
+                    {% if request.session.username %}
+                        <li><a href="{% url 'profile' %}">My Profile</a></li> <!-- My Profile link -->
+                    {% endif %}
                 </ul>
             </nav>
-            <ul>
+            <ul class="auth-buttons">
                 {% if request.session.username %}
-                    <a href="{% url 'profile' %}">My Profile</a>  <!-- Add My Profile link -->
                     {% if request.session.role == 'recruiter' %}
-                        <a href="{% url 'hr_dashboard' %}" class="sign-in-btn">HR Dashboard</a>
+                        <li><a href="{% url 'hr_dashboard' %}" class="sign-in-btn">HR Dashboard</a></li>
                     {% endif %}
-                    <a href="{% url 'logout' %}" class="sign-in-btn">Logout</a>
+                    <li><a href="{% url 'logout' %}" class="sign-in-btn">Logout</a></li>
                 {% else %}
-                    <a href="{% url 'signin' %}" class="sign-in-btn">Sign In Now</a>
-                    <a href="{% url 'register' %}" class="sign-in-btn">Register Now</a>
+                    <li><a href="{% url 'signin' %}" class="sign-in-btn">Sign In Now</a></li>
+                    <li><a href="{% url 'register' %}" class="sign-in-btn">Register Now</a></li>
                 {% endif %}
             </ul>
+            
         </div>
     </header>
+
     <!-- Content Block -->
     <main>
         {% block content %}
