@@ -259,18 +259,14 @@ def profile_view(request):
             if 'profile_picture' in request.FILES:
                 profile.profile_picture = request.FILES['profile_picture']
 
-            # Update email if it has changed (optional)
-            email = request.POST.get('email')
-            if email and email != request.user.email:
-                request.user.email = email
-                request.user.save()
-
+            # No need to update email here since it’s readonly in the template
             profile.save()
             messages.success(request, 'Profile updated successfully!')
             return redirect('profile')
 
         context = {
             'profile': profile,
+            'user': user,  # Pass the user object to the context
         }
         return render(request, 'main/profile.html', context)
 

@@ -130,8 +130,7 @@
         <img src="https://via.placeholder.com/120" alt="Profile Picture" class="profile-picture">
     {% endif %}
 
-    <h2>{{ request.session.username }}</h2>
-
+    <h2>{{ request.session.username}}</h2>
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
 
@@ -144,7 +143,8 @@
                 <input type="text" id="full_name" name="full_name" value="{{ profile.full_name }}" required>
 
                 <label for="email">Email:</label>
-                <input type="email" id="email" name="email" value="{{ request.session.email }}" readonly>
+                <input type="email" id="email" name="email" value="{{ user.email }}" readonly>
+
 
                 <label for="phone_number">Phone Number:</label>
                 <input type="text" id="phone_number" name="phone_number" value="{{ profile.phone_number }}">
