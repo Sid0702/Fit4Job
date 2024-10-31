@@ -30,6 +30,7 @@
             </nav>
             <ul>
                 {% if request.session.username %}
+                    <a href="{% url 'profile' %}">My Profile</a>  <!-- Add My Profile link -->
                     {% if request.session.role == 'recruiter' %}
                         <a href="{% url 'hr_dashboard' %}" class="sign-in-btn">HR Dashboard</a>
                     {% endif %}
@@ -38,6 +39,7 @@
                     <a href="{% url 'signin' %}" class="sign-in-btn">Sign In Now</a>
                     <a href="{% url 'register' %}" class="sign-in-btn">Register Now</a>
                 {% endif %}
+            </ul>
         </div>
     </header>
     <!-- Content Block -->
@@ -45,7 +47,7 @@
         {% block content %}
         {% endblock %}
     </main>
-      
+
 </body>
 
 </html>

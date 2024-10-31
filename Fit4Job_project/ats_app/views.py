@@ -84,6 +84,7 @@ def register_view(request):
 
     return render(request, 'main/register.html')
 
+
 @csrf_protect
 def signin_view(request):
     if request.method == 'POST':
@@ -95,6 +96,7 @@ def signin_view(request):
             if check_password(password, user.password):
                 # Store user info in the session, including the role
                 request.session['username'] = user.username
+                request.session['user_id'] = user.id
                 request.session['role'] = user.role
                 messages.success(request, 'Sign In successful')
 
@@ -237,3 +239,36 @@ def job_detail(request, job_id):
     
     # Render the job detail template
     return render(request, 'main/job_detail.html', {'job': job})
+
+def profile_view(request):
+    # No need to check for is_authenticated if you are managing sessions manually
+    if 'username' in request.session:
+        user = User.objects.get(id=request.session['user_id'])
+        profile, created = Profile.objects.get_or_create(user=user)
+
+        if request.method == 'POST':
+            # Update profile fields directly from the request
+            profile.full_name = request.POST.get('full_name')
+            profile.phone_number = request.POST.get('phone_number')
+            profile.description = request.POST.get('description')
+            profile.education = request.POST.get('education')
+            profile.skills = request.POST.get('skills')
+            profile.experience = request.POST.get('experience')
+            profile.preferred_location = request.POST.get('preferred_location')
+
+            # Handle profile picture upload
+            if 'profile_picture' in request.FILES:
+                profile.profile_picture = request.FILES['profile_picture']
+
+            profile.save()
+            messages.success(request, 'Profile updated successfully!')
+            return redirect('profile')
+
+        context = {
+            'profile': profile,
+        }
+        return render(request, 'main/profile.html', context)
+
+    # Redirect to login if the user is not authenticated
+    messages.warning(request, 'You need to be logged in to view your profile.')
+    return redirect('signin')

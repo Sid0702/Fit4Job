@@ -39,7 +39,11 @@ urlpatterns = [
     path('apply/<int:job_id>/', apply_for_job, name='apply_for_job'),  # Ensure this matches your use
     path('applicant', applicant_view, name='applicant'),
     path('job/<int:job_id>/', job_detail, name='job_detail'),
+
+    path('profile/', profile_view, name='profile'),
+
 ]
+
 
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

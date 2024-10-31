@@ -139,3 +139,7 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True
+LOGIN_URL = '/signin/'  # Adjust if your URL for sign-in is different
+LOGIN_REDIRECT_URL = '/profile/'
+
+
