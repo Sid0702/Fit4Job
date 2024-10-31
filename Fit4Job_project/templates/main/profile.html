@@ -130,7 +130,7 @@
         <img src="https://via.placeholder.com/120" alt="Profile Picture" class="profile-picture">
     {% endif %}
 
-    <h2>My Profile</h2>
+    <h2>{{ request.session.username }}</h2>
 
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
