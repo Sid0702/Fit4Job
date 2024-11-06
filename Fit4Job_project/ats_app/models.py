@@ -7,7 +7,8 @@ class User(models.Model):
     email = models.EmailField(unique=True)
     password = models.CharField(max_length=128)
     role = models.CharField(max_length=50)
-
+    is_new_user = models.BooleanField(default=True) 
+    
     def __str__(self):
         return self.username
 

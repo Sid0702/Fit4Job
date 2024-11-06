@@ -100,10 +100,14 @@ def signin_view(request):
                 request.session['role'] = user.role
                 messages.success(request, 'Sign In successful')
 
-                if user.role == 'recruiter':
+                if user.is_new_user:
+                    user.is_new_user = False  # Mark the user as no longer new
+                    user.save()  # Save the change to the database
+                    return redirect('profile')  # Redirect new user to profile page
+                elif user.role == 'recruiter':
                     return redirect('hr_dashboard')  # Redirect HR users to the HR dashboard
                 else:
-                    return redirect('index')  # Redirect other users to job view
+                    return redirect('index') 
 
             else:
                 messages.error(request, 'Invalid password')
