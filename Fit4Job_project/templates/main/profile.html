@@ -121,6 +121,66 @@
     .button:hover {
         background-color: #5a6268;
     }
+
+    .form-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    }
+
+    .form-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    }
+
+    .form-column {
+    flex: 1;
+    }
+
+    .form-group {
+    margin-bottom: 15px;
+    }
+
+    label {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 5px;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="tel"],
+    input[type="number"],
+    select,
+    textarea {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    }
+
+    textarea {
+    resize: vertical;
+    height: 100px;
+    }
+
+    button.btn-submit {
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    }
+
+    button.btn-submit:hover {
+    background-color: #45a049;
+    }
+
 </style>
 
 <div class="profile-container">
@@ -137,37 +197,97 @@
         <label for="profile_picture">Profile Picture:</label>
         <input type="file" id="profile_picture" name="profile_picture">
 
-        <div class="form-row">
-            <div class="form-column">
-                <label for="full_name">Full Name:</label>
-                <input type="text" id="full_name" name="full_name" value="{{ profile.full_name }}" required>
-
-                <label for="email">Email:</label>
-                <input type="email" id="email" name="email" value="{{ user.email }}" readonly>
-
-
-                <label for="phone_number">Phone Number:</label>
-                <input type="text" id="phone_number" name="phone_number" value="{{ profile.phone_number }}">
-
-                <label for="education">Education:</label>
-                <input type="text" id="education" name="education" value="{{ profile.education }}">
-            </div>
-
-            <div class="form-column">
-                <label for="description">Short Description:</label>
-                <textarea id="description" name="description">{{ profile.description }}</textarea>
-
-                <label for="skills">Skills:</label>
-                <input type="text" id="skills" name="skills" value="{{ profile.skills }}">
-
-                <label for="experience">Experience:</label>
-                <textarea id="experience" name="experience">{{ profile.experience }}</textarea>
-
-                <label for="preferred_location">Preferred Location:</label>
-                <input type="text" id="preferred_location" name="preferred_location" value="{{ profile.preferred_location }}">
-            </div>
+        <div class="form-container">
+            <form action="{{ form_action_url }}" method="POST">
+                <div class="form-row">
+                    <label for="profile_picture">Profile Picture:</label>
+        <input type="file" id="profile_picture" name="profile_picture">
+                    <!-- Left Column -->
+                    <div class="form-column">
+                        <div class="form-group">
+                            <label for="full_name">Full Name:</label>
+                            <input type="text" id="full_name" name="full_name" value="{{ profile.full_name }}" required placeholder="Enter your full name">
+                        </div>
+        
+                        <div class="form-group">
+                            <label for="email">Email:</label>
+                            <input type="email" id="email" name="email" value="{{ user.email }}" readonly placeholder="Your email address">
+                        </div>
+        
+                        <div class="form-group">
+                            <label for="phone_number">Phone Number:</label>
+                            <input type="tel" id="phone_number" name="phone_number" value="{{ profile.phone_number }}" pattern="^[0-9]{10}$" maxlength="10" placeholder="Enter your 10-digit phone number" required>
+                        </div>
+        
+                        <div class="form-group">
+                            <label for="education">Education:</label>
+                            <select id="education" name="education" required>
+                                <option value="" disabled {% if not profile.education %}selected{% endif %}>Select your highest education level</option>
+                                <option value="High School" {% if profile.education == 'High School' %}selected{% endif %}>High School</option>
+                                <option value="Associate Degree" {% if profile.education == 'Associate Degree' %}selected{% endif %}>Associate Degree</option>
+                                <option value="Bachelor's Degree" {% if profile.education == "Bachelor's Degree" %}selected{% endif %}>Bachelor's Degree</option>
+                                <option value="Master's Degree" {% if profile.education == "Master's Degree" %}selected{% endif %}>Master's Degree</option>
+                                <option value="PhD" {% if profile.education == 'PhD' %}selected{% endif %}>PhD</option>
+                            </select>
+                        </div>
+                    </div>
+        
+                    <!-- Right Column -->
+                    <div class="form-column">
+                        <div class="form-group">
+                            <label for="description">Short Description:</label>
+                            <textarea id="description" name="description" placeholder="Write a brief description about yourself">{{ profile.description }}</textarea>
+                        </div>
+        
+                        <div class="form-group">
+                            <label for="skills">Skills:</label>
+                            <input type="text" id="skills" name="skills" value="{{ profile.skills }}" placeholder="Your professional skills (comma separated)">
+                        </div>
+        
+                        <div class="form-group">
+                            <label for="experience">Experience (in years):</label>
+                            <input type="number" id="experience" name="experience" value="{{ profile.experience }}" min="0" max="50" placeholder="Years of experience" required>
+                        </div>
+        
+                        <div class="form-group">
+                            <label for="preferred_location">Preferred Location:</label>
+                            <select id="preferred_location" name="preferred_location" required>
+                                <option value="" disabled {% if not profile.preferred_location %}selected{% endif %}>Select your preferred location</option>
+                                <!-- Add all states of India -->
+                                <option value="Andhra Pradesh" {% if profile.preferred_location == 'Andhra Pradesh' %}selected{% endif %}>Andhra Pradesh</option>
+                                <option value="Arunachal Pradesh" {% if profile.preferred_location == 'Arunachal Pradesh' %}selected{% endif %}>Arunachal Pradesh</option>
+                                <option value="Assam" {% if profile.preferred_location == 'Assam' %}selected{% endif %}>Assam</option>
+                                <option value="Bihar" {% if profile.preferred_location == 'Bihar' %}selected{% endif %}>Bihar</option>
+                                <option value="Chhattisgarh" {% if profile.preferred_location == 'Chhattisgarh' %}selected{% endif %}>Chhattisgarh</option>
+                                <option value="Goa" {% if profile.preferred_location == 'Goa' %}selected{% endif %}>Goa</option>
+                                <option value="Gujarat" {% if profile.preferred_location == 'Gujarat' %}selected{% endif %}>Gujarat</option>
+                                <option value="Haryana" {% if profile.preferred_location == 'Haryana' %}selected{% endif %}>Haryana</option>
+                                <option value="Himachal Pradesh" {% if profile.preferred_location == 'Himachal Pradesh' %}selected{% endif %}>Himachal Pradesh</option>
+                                <option value="Jharkhand" {% if profile.preferred_location == 'Jharkhand' %}selected{% endif %}>Jharkhand</option>
+                                <option value="Karnataka" {% if profile.preferred_location == 'Karnataka' %}selected{% endif %}>Karnataka</option>
+                                <option value="Kerala" {% if profile.preferred_location == 'Kerala' %}selected{% endif %}>Kerala</option>
+                                <option value="Madhya Pradesh" {% if profile.preferred_location == 'Madhya Pradesh' %}selected{% endif %}>Madhya Pradesh</option>
+                                <option value="Maharashtra" {% if profile.preferred_location == 'Maharashtra' %}selected{% endif %}>Maharashtra</option>
+                                <option value="Manipur" {% if profile.preferred_location == 'Manipur' %}selected{% endif %}>Manipur</option>
+                                <option value="Meghalaya" {% if profile.preferred_location == 'Meghalaya' %}selected{% endif %}>Meghalaya</option>
+                                <option value="Mizoram" {% if profile.preferred_location == 'Mizoram' %}selected{% endif %}>Mizoram</option>
+                                <option value="Nagaland" {% if profile.preferred_location == 'Nagaland' %}selected{% endif %}>Nagaland</option>
+                                <option value="Odisha" {% if profile.preferred_location == 'Odisha' %}selected{% endif %}>Odisha</option>
+                                <option value="Punjab" {% if profile.preferred_location == 'Punjab' %}selected{% endif %}>Punjab</option>
+                                <option value="Rajasthan" {% if profile.preferred_location == 'Rajasthan' %}selected{% endif %}>Rajasthan</option>
+                                <option value="Sikkim" {% if profile.preferred_location == 'Sikkim' %}selected{% endif %}>Sikkim</option>
+                                <option value="Tamil Nadu" {% if profile.preferred_location == 'Tamil Nadu' %}selected{% endif %}>Tamil Nadu</option>
+                                <option value="Telangana" {% if profile.preferred_location == 'Telangana' %}selected{% endif %}>Telangana</option>
+                                <option value="Tripura" {% if profile.preferred_location == 'Tripura' %}selected{% endif %}>Tripura</option>
+                                <option value="Uttar Pradesh" {% if profile.preferred_location == 'Uttar Pradesh' %}selected{% endif %}>Uttar Pradesh</option>
+                                <option value="Uttarakhand" {% if profile.preferred_location == 'Uttarakhand' %}selected{% endif %}>Uttarakhand</option>
+                                <option value="West Bengal" {% if profile.preferred_location == 'West Bengal' %}selected{% endif %}>West Bengal</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </form>
         </div>
-
         <button type="submit">Save</button>
         <a href="{% url 'index' %}" class="button">Cancel</a>
     </form>
