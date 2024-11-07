@@ -41,15 +41,21 @@ class Job(models.Model):
         return self.title
 
 class JobApplication(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)  # Link to the user applying for the job
-    first_name = models.CharField(max_length=100)
-    last_name = models.CharField(max_length=100)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    job = models.ForeignKey(Job, on_delete=models.CASCADE)
+    full_name = models.CharField(max_length=100)
     email = models.EmailField()
     phone_number = models.CharField(max_length=15)
     position_applying_for = models.CharField(max_length=100)
     message = models.TextField(blank=True)
-    cv = models.FileField(upload_to='cv_uploads/')  # Directory for CV uploads
-    submitted_at = models.DateTimeField(auto_now_add=True)  # Timestamp for submission
+    cv = models.FileField(upload_to='cv_uploads/')
+    submitted_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(fields=['user', 'job'], name='unique_job_application')
+        ]
 
     def __str__(self):
         return f"{self.first_name} {self.last_name} - {self.position_applying_for}"
+

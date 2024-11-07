@@ -2,179 +2,184 @@
 {% extends 'base.html' %}
 
 {% block content %}
-
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://kit.fontawesome.com/4cce9f2fd3.js"></script>
-    <link href="https://kit-free.fontawesome.com/releases/latest/css/free-v4-shims.min.css" media="all"
-        rel="stylesheet">
-    <link href="https://kit-free.fontawesome.com/releases/latest/css/free-v4-font-face.min.css" media="all"
-        rel="stylesheet">
+    <link href="https://kit-free.fontawesome.com/releases/latest/css/free-v4-shims.min.css" media="all" rel="stylesheet">
+    <link href="https://kit-free.fontawesome.com/releases/latest/css/free-v4-font-face.min.css" media="all" rel="stylesheet">
     <link href="https://kit-free.fontawesome.com/releases/latest/css/free.min.css" media="all" rel="stylesheet">
     <style>
-   body {
-    background-color: #e8edf6;
-    font-family: 'Poppins', sans-serif;
-    margin: 0;
-    padding-top: 80px;
-    padding-bottom: 20px; /* Adjusted bottom padding for better spacing */
-    overflow: auto; /* Ensure the page can scroll if needed */
-}
+        body {
+            background-color: #e8edf6;
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding-top: 80px;
+            padding-bottom: 20px;
+            overflow: auto;
+        }
 
-.apply-form-elements {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: calc(100vh - 100px); /* Full height minus navbar height */
-    padding: 20px;
-    position: relative;
-}
+        .apply-form-elements {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: calc(100vh - 100px);
+            padding: 20px;
+            position: relative;
+        }
 
-.apply-form-body {
-    background: linear-gradient(135deg, #9bcaee, #b1caf5);  /* Light blue background */
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    max-width: 600px;
-    border: 3px solid #3d5593;
-    width: 100%;
-    padding: 30px;
-    margin: 20px 0; /* Margin to ensure form edges are visible */
-}
+        .apply-form-body {
+            background: linear-gradient(135deg, #9bcaee, #b1caf5);
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            border: 3px solid #3d5593;
+            width: 100%;
+            padding: 30px;
+            margin: 20px 0;
+        }
 
-.apply-form-title {
-    display: flex;
-    justify-content: center; /* Centering the heading */
-    align-items: center;
-    font-size: 24px;
-    font-weight: bold;
-    margin-bottom: 20px;
-    color: #011a32;
-    position: relative;
-}
+        .apply-form-title {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            color: #011a32;
+            position: relative;
+        }
 
-.apply-form-close-btn a {
-    position: absolute;
-    right: 0;
-    top: 0;
-    text-decoration: none;
-    color: #ff4b4b;
-    font-size: 24px;
-}
+        .apply-form-close-btn a {
+            position: absolute;
+            right: 0;
+            top: 0;
+            text-decoration: none;
+            color: #ff4b4b;
+            font-size: 24px;
+        }
 
-.apply-form-content-element {
-    margin-top: 20px;
-}
+        .apply-form-content-element {
+            margin-top: 20px;
+        }
 
-.apply-form-group {
-    margin-bottom: 15px;
-}
+        .apply-form-group {
+            margin-bottom: 15px;
+        }
 
-.apply-form-group label {
-    display: block;
-    font-size: 14px;
-    color: #333;
-    margin-bottom: 5px;
-}
+        .apply-form-group label {
+            display: block;
+            font-size: 14px;
+            color: #333;
+            margin-bottom: 5px;
+        }
 
-.apply-form-group input,
-.apply-form-group textarea {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    font-size: 14px;
-    resize: none;
-}
+        .apply-form-group input,
+        .apply-form-group textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 14px;
+            resize: none;
+        }
 
-.apply-form-group textarea {
-    height: 100px;
-}
+        .apply-form-group textarea {
+            height: 100px;
+        }
 
-.upload-btn-folder {
-    margin-bottom: 15px;
-}
+        .upload-btn-folder {
+            margin-bottom: 15px;
+        }
 
-.upload-btn-folder label {
-    font-size: 14px;
-    color: #333;
-}
+        .upload-btn-folder label {
+            font-size: 14px;
+            color: #333;
+        }
 
-.upload-btn-folder input[type="file"] {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-}
+        .upload-btn-folder input[type="file"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
 
-.submit {
-    display: flex;
-    justify-content: center; /* Centering the submit button */
-    margin-top: 20px;
-}
+        .submit {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
 
-.submit .btn {
-    width: auto; /* Make the submit button smaller */
-    background-color: #03205a;
-    color: #faf9f5;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 4px;
-    font-size: 16px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
+        .submit .btn {
+            width: auto;
+            background-color: #03205a;
+            color: #faf9f5;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
 
-.submit .btn:hover {
-    background-color: #28385b;
-}
-
+        .submit .btn:hover {
+            background-color: #28385b;
+        }
     </style>
 </head>
 
 <!-- Job Application Form -->
 <div class="apply-form-elements">
     <div class="apply-form-body">
-        <div class="apply-form-title"><b>
-            CV Submission</b>
+        <div class="apply-form-title">
+            <b>CV Submission</b>
             <div class="apply-form-close-btn">
                 <a href="{% url 'job' %}" class="closebtn">×</a>
             </div>
         </div>
         <section class="apply-form-content-element">
             <div class="apply-form-contact-box">
-                <form method="post" enctype="multipart/form-data">
+                <form method="POST" enctype="multipart/form-data">
                     {% csrf_token %}
+
                     <div class="apply-form-group">
-                        <label>First Name</label>
-                        <input type="text" name="firstname" placeholder="First Name" required>
+                        <label for="firstname">Full Name:</label>
+                        <input type="text" id="firstname" name="firstname" value="{{ profile.full_name }}" readonly>
                     </div>
+
                     <div class="apply-form-group">
-                        <label>Last Name</label>
-                        <input type="text" name="lastname" placeholder="Last Name" required>
+                        <label for="email">Email:</label>
+                        <input type="email" id="email" name="email" value="{{ user.email }}" readonly>
                     </div>
+
                     <div class="apply-form-group">
-                        <label>Email Address</label>
-                        <input type="email" name="email" placeholder="Email Address" required>
+                        <label for="phonenumber">Phone Number:</label>
+                        <input type="text" id="phonenumber" name="phonenumber" value="{{ profile.phone_number }}" readonly>
                     </div>
+
                     <div class="apply-form-group">
-                        <label>Phone Number</label>
-                        <input type="text" name="phonenumber" placeholder="Phone Number" required>
+                        <label for="position-applying-for">Position Applying For:</label>
+                        <input type="text" id="position-applying-for" name="position-applying-for" value="{{ job.title }}" readonly>
                     </div>
+
                     <div class="apply-form-group">
-                        <label>Position Applying For</label>
-                        <input type="text" name="position-applying-for" placeholder="Position Applying For" required>
+                        <label for="skills">Skills:</label>
+                        <textarea id="skills" name="skills" readonly>{{ profile.skills }}</textarea>
                     </div>
+                    
+
                     <div class="apply-form-group">
-                        <label>Additional Information</label>
-                        <textarea name="message" placeholder="Additional Information" required></textarea>
+                        <label for="message">Message:</label>
+                        <textarea id="message" name="message"></textarea>
                     </div>
+
                     <div class="upload-btn-folder">
-                        <label>Upload your CV Here</label>
-                        <input type="file" name="cv" required>
+                        <label for="cv">Upload CV:</label>
+                        <input type="file" id="cv" name="cv">
                     </div>
+
                     <div class="submit">
-                        <button class="btn" type="submit">SUBMIT</button>
+                        <button type="submit" class="btn">Apply</button>
                     </div>
                 </form>
             </div>
@@ -182,5 +187,4 @@
         <footer class="apply-form-footer-element"></footer>
     </div>
 </div>
-
 {% endblock %}

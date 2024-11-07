@@ -11,6 +11,8 @@ from datetime import date
 from django.db.models import Q
 from django.core.paginator import Paginator
 from django.utils import timezone
+from django.shortcuts import render, redirect, get_object_or_404
+from .models import JobApplication, Profile
 
 def index(request):
     return render(request, 'main/index.html')
@@ -189,37 +191,49 @@ def edit_job(request, job_id):
     
     return render(request, 'main/edit_job.html', {'job': job})
 
+
+# views.py
 def apply_for_job(request, job_id):
     job = get_object_or_404(Job, id=job_id)
-    print(f"Rendering apply_form.html for job: {job.title}")
-    
+    user = User.objects.get(username=request.session.get('username'))
+    profile = Profile.objects.get(user=user)  # Assuming a Profile exists for each user
+
     if request.method == 'POST':
-        user = User.objects.get(username=request.session.get('username'))
-        first_name = request.POST.get('firstname')
-        last_name = request.POST.get('lastname')
+        # Combine first and last name, or use profile full name as fallback
+        full_name = request.POST.get('full_name') or profile.full_name
         email = request.POST.get('email')
         phone_number = request.POST.get('phonenumber')
         position_applying_for = request.POST.get('position-applying-for')
         message = request.POST.get('message')
         cv = request.FILES.get('cv')
 
-        # Create the application
-        job = JobApplication.objects.create(
+        if JobApplication.objects.filter(user=user, job=job).exists():
+            messages.warning(request, 'You have already applied for this job.')
+            return redirect('job_detail', job_id=job.id)
+
+        # Create job application
+        job_application = JobApplication.objects.create(
             user=user,
-            first_name=first_name,
-            last_name=last_name,
+            job=job,
+            full_name=full_name,
             email=email,
             phone_number=phone_number,
             position_applying_for=position_applying_for,
             message=message,
             cv=cv
         )
-        job.save()
-        print("Applied")
-        # Redirect to a success page or job listing
-        return redirect('job')  # Change this to your desired URL after successful submission
 
-    return render(request, 'main/apply_form.html', {'job': job})
+        messages.success(request, 'Job application submitted successfully!')
+        return redirect('job')
+
+    context = {
+        'job': job,
+        'profile': profile,
+        'user': user,
+    }
+    return render(request, 'main/apply_form.html', context)
+
+
 
 # def user_job_list(request):
 
@@ -230,11 +244,20 @@ def applicant_view(request):
     if request.session.get('role') == 'recruiter':
         user = User.objects.get(username=request.session.get('username'))
         jobs = Job.objects.filter(user=user)
+        
+        # Retrieve job applications for the jobs posted by the recruiter
+        job_applications = JobApplication.objects.filter(job__in=jobs)
+        
+        context = {
+            "jobs": jobs,
+            "job_applications": job_applications,
+        }
+        
+        return render(request, 'main/applicants.html', context)
     else:
         messages.error(request, 'Access denied. HR only.')
         return redirect('job')
 
-    return render(request, 'main/applicants.html', {"jobs": jobs})
 
 
 def job_detail(request, job_id):
@@ -243,6 +266,7 @@ def job_detail(request, job_id):
     
     # Render the job detail template
     return render(request, 'main/job_detail.html', {'job': job})
+
 
 def profile_view(request):
     if 'username' in request.session:
