@@ -295,6 +295,7 @@
                                required 
                                inputmode="numeric"
                                title="Please enter a valid 10-digit phone number (only numbers)">
+                               
                     </div>
                                 
                     <div class="form-group">
@@ -333,9 +334,43 @@
                             <option value="" disabled {% if not profile.preferred_location %}selected{% endif %}>Select your preferred location</option>
                             <option value="Andhra Pradesh" {% if profile.preferred_location == 'Andhra Pradesh' %}selected{% endif %}>Andhra Pradesh</option>
                             <option value="Arunachal Pradesh" {% if profile.preferred_location == 'Arunachal Pradesh' %}selected{% endif %}>Arunachal Pradesh</option>
-                            <!-- Add other states here -->
+                            <option value="Assam" {% if profile.preferred_location == 'Assam' %}selected{% endif %}>Assam</option>
+                            <option value="Bihar" {% if profile.preferred_location == 'Bihar' %}selected{% endif %}>Bihar</option>
+                            <option value="Chhattisgarh" {% if profile.preferred_location == 'Chhattisgarh' %}selected{% endif %}>Chhattisgarh</option>
+                            <option value="Goa" {% if profile.preferred_location == 'Goa' %}selected{% endif %}>Goa</option>
+                            <option value="Gujarat" {% if profile.preferred_location == 'Gujarat' %}selected{% endif %}>Gujarat</option>
+                            <option value="Haryana" {% if profile.preferred_location == 'Haryana' %}selected{% endif %}>Haryana</option>
+                            <option value="Himachal Pradesh" {% if profile.preferred_location == 'Himachal Pradesh' %}selected{% endif %}>Himachal Pradesh</option>
+                            <option value="Jharkhand" {% if profile.preferred_location == 'Jharkhand' %}selected{% endif %}>Jharkhand</option>
+                            <option value="Karnataka" {% if profile.preferred_location == 'Karnataka' %}selected{% endif %}>Karnataka</option>
+                            <option value="Kerala" {% if profile.preferred_location == 'Kerala' %}selected{% endif %}>Kerala</option>
+                            <option value="Madhya Pradesh" {% if profile.preferred_location == 'Madhya Pradesh' %}selected{% endif %}>Madhya Pradesh</option>
+                            <option value="Maharashtra" {% if profile.preferred_location == 'Maharashtra' %}selected{% endif %}>Maharashtra</option>
+                            <option value="Manipur" {% if profile.preferred_location == 'Manipur' %}selected{% endif %}>Manipur</option>
+                            <option value="Meghalaya" {% if profile.preferred_location == 'Meghalaya' %}selected{% endif %}>Meghalaya</option>
+                            <option value="Mizoram" {% if profile.preferred_location == 'Mizoram' %}selected{% endif %}>Mizoram</option>
+                            <option value="Nagaland" {% if profile.preferred_location == 'Nagaland' %}selected{% endif %}>Nagaland</option>
+                            <option value="Odisha" {% if profile.preferred_location == 'Odisha' %}selected{% endif %}>Odisha</option>
+                            <option value="Punjab" {% if profile.preferred_location == 'Punjab' %}selected{% endif %}>Punjab</option>
+                            <option value="Rajasthan" {% if profile.preferred_location == 'Rajasthan' %}selected{% endif %}>Rajasthan</option>
+                            <option value="Sikkim" {% if profile.preferred_location == 'Sikkim' %}selected{% endif %}>Sikkim</option>
+                            <option value="Tamil Nadu" {% if profile.preferred_location == 'Tamil Nadu' %}selected{% endif %}>Tamil Nadu</option>
+                            <option value="Telangana" {% if profile.preferred_location == 'Telangana' %}selected{% endif %}>Telangana</option>
+                            <option value="Tripura" {% if profile.preferred_location == 'Tripura' %}selected{% endif %}>Tripura</option>
+                            <option value="Uttar Pradesh" {% if profile.preferred_location == 'Uttar Pradesh' %}selected{% endif %}>Uttar Pradesh</option>
+                            <option value="Uttarakhand" {% if profile.preferred_location == 'Uttarakhand' %}selected{% endif %}>Uttarakhand</option>
+                            <option value="West Bengal" {% if profile.preferred_location == 'West Bengal' %}selected{% endif %}>West Bengal</option>
+                            <option value="Andaman and Nicobar Islands" {% if profile.preferred_location == 'Andaman and Nicobar Islands' %}selected{% endif %}>Andaman and Nicobar Islands</option>
+                            <option value="Chandigarh" {% if profile.preferred_location == 'Chandigarh' %}selected{% endif %}>Chandigarh</option>
+                            <option value="Dadra and Nagar Haveli and Daman and Diu" {% if profile.preferred_location == 'Dadra and Nagar Haveli and Daman and Diu' %}selected{% endif %}>Dadra and Nagar Haveli and Daman and Diu</option>
+                            <option value="Delhi" {% if profile.preferred_location == 'Delhi' %}selected{% endif %}>Delhi</option>
+                            <option value="Jammu and Kashmir" {% if profile.preferred_location == 'Jammu and Kashmir' %}selected{% endif %}>Jammu and Kashmir</option>
+                            <option value="Ladakh" {% if profile.preferred_location == 'Ladakh' %}selected{% endif %}>Ladakh</option>
+                            <option value="Lakshadweep" {% if profile.preferred_location == 'Lakshadweep' %}selected{% endif %}>Lakshadweep</option>
+                            <option value="Puducherry" {% if profile.preferred_location == 'Puducherry' %}selected{% endif %}>Puducherry</option>
                         </select>
                     </div>
+                    
                 </div>
             </div>
         </div>
